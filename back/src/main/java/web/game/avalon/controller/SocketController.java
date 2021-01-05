@@ -22,7 +22,6 @@ public class SocketController {
     public void test(MessageDto messageDto){
         //Room room=manager.getRoomById(messageDto.getRoomId());
         String msg=String.format("%s:%s",messageDto.getUserId(),messageDto.getMsg());
-        System.out.println((messageDto));
         template.convertAndSend("/topic/chatting/"+messageDto.getRoomId(),msg);
     }
 }
