@@ -38,5 +38,9 @@ public class RoomManager {
         return rooms.remove(roomId,room);
     }
 
+    public Room getRoomById(String roomId){
+        return rooms.get(roomId);
+    }
+
 
 }
