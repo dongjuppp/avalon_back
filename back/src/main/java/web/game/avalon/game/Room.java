@@ -1,9 +1,12 @@
 package web.game.avalon.game;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 
 
 import lombok.Getter;
 import lombok.Setter;
+import web.game.avalon.dto.UserDto;
+import web.game.avalon.utils.SirialNumber;
 
 @Getter
 @Setter
@@ -13,19 +16,17 @@ public class Room {
     //private int NumberOfPeople;
     private Game game;
     private String roomId;
-    private static SecureRandom random = new SecureRandom();
-    String ENGLISH_LOWER = "abcdefghijklmnopqrstuvwxyz";
-    String ENGLISH_UPPER = ENGLISH_LOWER.toUpperCase();
-    String NUMBER = "0123456789";
+    private ArrayList<UserDto> userList;
+    private String roomMaker;
 
-    /** 랜덤을 생성할 대상 문자열 **/
-    String DATA_FOR_RANDOM_STRING = ENGLISH_LOWER + ENGLISH_UPPER + NUMBER;
 
-    /** 랜덤 문자열 길이 **/
-    int random_string_length=10;
+    private void makeId(){
+        roomId= SirialNumber.getSirialNumber();
+    }
 
     public void makeGame(){
         makeId();
+        userList=new ArrayList<>();
         this.game=new Game();
     }
 
@@ -33,21 +34,33 @@ public class Room {
         return roomId;
     }
 
-
-
-    private static String generate(String DATA, int length) {
-        if (length < 1) throw new IllegalArgumentException("length must be a positive number.");
-        StringBuilder sb = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
-            sb.append( DATA.charAt(
-                    random.nextInt(DATA.length())
-            ));
-        }
-        return sb.toString();
+    public void addUser(UserDto userDto){
+        userList.add(userDto);
     }
 
-    private void makeId(){
-        roomId=generate(DATA_FOR_RANDOM_STRING,random_string_length);
+    public ArrayList<UserDto> getUserList(){
+        return userList;
+    }
+
+
+    //입장 가능한지
+    public String isEnter(){
+        int size=0;
+        if(rule==1){
+            size=5;
+        }
+        else if(rule==2 || rule==3){
+            size=6;
+        }
+        else if(rule==4 || rule==5) size=7;
+        else if(rule==6 || rule==7) size=8;
+        else if(rule==8 || rule==9) size=9;
+        else size=10;
+
+        //System.out.println(size+" "+userList.size());
+        if(userList.size()<size) return "success";
+        else return "max";
+        //return "max";
     }
 
 }
