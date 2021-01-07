@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import web.game.avalon.dto.MessageDto;
 import web.game.avalon.dto.UserDto;
+import web.game.avalon.game.Game;
 import web.game.avalon.game.Room;
 import web.game.avalon.game.RoomManager;
+import web.game.avalon.game.state.StateEnum;
 
 @RestController
 public class SocketController {
@@ -44,5 +46,30 @@ public class SocketController {
         messageDto.setImage("que");
         messageDto.setUsers(room.getUserList());
         template.convertAndSend("/topic/whoEntry"+messageDto.getRoomId(),messageDto);
+    }
+
+    @MessageMapping("/exit")
+    public void exitRoom(MessageDto messageDto){
+        if(manager.deleteRoom(messageDto.getRoomId())){
+            messageDto.setMsg("success");
+            template.convertAndSend("/topic/exit"+messageDto.getRoomId(),messageDto);
+        }
+        else{
+            template.convertAndSend("/topic/exitFail/"+messageDto.getRoomId()+"/"+messageDto.getUserId(),
+                    "방을 삭제하는데 실패 했습니다");
+        }
+    }
+
+    @MessageMapping("/start")
+    public void start(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+
+        if(game.getStateEnum()== StateEnum.Init){
+            game.setStateEnum(StateEnum.Choice);
+        }
+
+        template.convertAndSend("/topic/start"+messageDto.getRoomId());
+
     }
 }

@@ -63,4 +63,13 @@ public class Room {
         //return "max";
     }
 
+    public boolean isDuplicationMember(String userId){
+        for(UserDto userDto:userList){
+            if(userDto.getUserId().equals(userId)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

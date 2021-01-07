@@ -32,25 +32,24 @@ public class RoomController {
     public String makeRoom(@RequestBody Room room){
         room.makeGame();
         if(roomManager.insertRoom(room)){
-//            UserDto tmp=new UserDto();
-//            tmp.setUserId(room.getRoomMaker());
-//            room.addUser(tmp);
             return room.getRoomId();
         }
         return "fail";
     }
 
     @GetMapping("/deleteRoom")
-    public String deleteRoom(@PathVariable String roomId){
+    public String deleteRoom(@RequestParam String roomId){
         System.out.println(roomId);
         if(roomManager.deleteRoom(roomId)) return "success";
         return "fail";
     }
 
     @GetMapping("/isMax")
-    public String isMax(@RequestParam String roomId){
+    public String isMax(@RequestParam String roomId,@RequestParam String userId){
         //System.out.println(roomId);
+
         Room room=roomManager.getRoomById(roomId);
+        if(!room.isDuplicationMember(userId)) return "duplication";
         return room.isEnter();
 
     }
