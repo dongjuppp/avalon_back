@@ -5,12 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import web.game.avalon.dto.CharacterDto;
 import web.game.avalon.dto.MessageDto;
 import web.game.avalon.dto.UserDto;
 import web.game.avalon.game.Game;
+import web.game.avalon.game.Player;
 import web.game.avalon.game.Room;
 import web.game.avalon.game.RoomManager;
 import web.game.avalon.game.state.StateEnum;
+
+import java.util.ArrayList;
 
 @RestController
 public class SocketController {
@@ -45,6 +49,7 @@ public class SocketController {
         messageDto.setMsg(msg);
         messageDto.setImage("que");
         messageDto.setUsers(room.getUserList());
+
         template.convertAndSend("/topic/whoEntry"+messageDto.getRoomId(),messageDto);
     }
 
@@ -60,16 +65,55 @@ public class SocketController {
         }
     }
 
+    @MessageMapping("/choice")
+    public void choice(MessageDto messageDto){
+        String userId=messageDto.getUserId();
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+        int turn=game.getNowTurn();
+        ArrayList<String> users=game.getUserStrings();
+        String now="";
+        for(int i=0;i<users.size();i++){
+            if(i+1==turn){
+                now=users.get(i);
+            }
+        }
+        if(now.equals(messageDto.getUserId())){
+            template.convertAndSend("");
+        }
+        else{
+            template.convertAndSend("");
+        }
+    }
+
     @MessageMapping("/start")
     public void start(MessageDto messageDto){
         Room room=manager.getRoomById(messageDto.getRoomId());
         Game game=room.getGame();
-
+        ArrayList<Player> playerList=game.makeRole(room.getUserList(),room.getRule());
         if(game.getStateEnum()== StateEnum.Init){
             game.setStateEnum(StateEnum.Choice);
         }
+        //System.out.println("플에이어 사이즈"+playerList.size());
+        String msg="턴순서는: ";
+        ArrayList<String> userIds=new ArrayList<>();
+        for(Player player:playerList){
+            msg+=player.getUserId()+"->";
+            userIds.add(player.getUserId());
+        }
 
-        template.convertAndSend("/topic/start"+messageDto.getRoomId());
+
+        for(Player player:playerList){
+            CharacterDto characterDto=new CharacterDto();
+            characterDto.setMsg(msg);
+            characterDto.setUsers(userIds);
+            characterDto.setImages(player.getImages());
+            String userId=player.getUserId();
+            template.convertAndSend("/topic/start"+messageDto.getRoomId()+"/"+userId
+                    ,characterDto);
+        }
 
     }
+
+
 }

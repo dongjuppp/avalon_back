@@ -15,12 +15,22 @@ import java.util.List;
 public class Game {
     private StateEnum stateEnum;
     private Hashtable<String,Player> table;
+    private ArrayList<Player> playerList;
+    private ArrayList<String> image;
+    private ArrayList<String> userStrings;
+    private ArrayList<Boolean> checked;
+    private int turn;
     private int rule;
 
     public Game(){
         stateEnum=StateEnum.Init;
         table=new Hashtable<>();
+        checked=new ArrayList<>();
+        userStrings=new ArrayList<>();
+        //playerList=new ArrayList<>();
     }
+    public ArrayList<String> getUserStrings(){return userStrings;}
+    public ArrayList<String> getImage(){return image;}
 
     public StateEnum getStateEnum(){
         return stateEnum;
@@ -30,7 +40,9 @@ public class Game {
         this.stateEnum=stateEnum;
     }
 
-    public void makeRole(ArrayList<UserDto> users,int rule){
+    // 게임 룰에 맞춰 캐릭터를 정하고 사용자에게 역할을 랜덤하게 부여하고 이미지도 준다
+    public ArrayList<Player> makeRole(ArrayList<UserDto> users,int rule){
+        turn=1;
         Collections.shuffle(users);
         this.rule=rule;
         ArrayList<GameCharacter> characters=CharacterFactory.getCharacters(this.rule);
@@ -40,7 +52,42 @@ public class Game {
             table.put(users.get(i).getUserId(),player);
         }
 
+        ArrayList<Player> players=new ArrayList<>();
+        for(UserDto userDto:users){
+            players.add(table.get(userDto.getUserId()));
+            userStrings.add(userDto.getUserId());
+        }
+
+        for(int i=0;i<users.size();i++){
+            ArrayList<String> images=new ArrayList<>();
+            for(int j=0;j<users.size();j++){
+                if(players.get(i).getGameCharacter().getName().equals("일반선")){
+                    if(i==j){
+                        images.add("normalgood1");
+                    }
+                    else{
+                        images.add("que");
+                    }
+                }
+                else{
+                    images.add(
+                            CharacterFactory.getPlayerInImage(players.get(i).getGameCharacter()
+                                    ,players.get(j).getGameCharacter()));
+                }
+            }
+            players.get(i).setImages(images);
+            this.image=images;
+            playerList=players;
+        }
+        return playerList;
     }
 
+    public int getNowTurn(){
+        return turn;
+    }
+
+    public ArrayList<Player> getPlayerList(){
+        return playerList;
+    }
 
 }

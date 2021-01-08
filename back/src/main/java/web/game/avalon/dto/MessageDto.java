@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class MessageDto {
     private String roomId;
     private String userId;
+    private String choiceId;
     private String image;
     private String msg;
     private int rule;

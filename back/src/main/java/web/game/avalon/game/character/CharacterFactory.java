@@ -92,18 +92,63 @@ public class CharacterFactory {
         return list;
     }
 
-    public static void getPlayerInImage(ArrayList<Player> list,Player player){
-        ArrayList<String> images=new ArrayList<>();
-        String myName=player.getGameCharacter().getName();
+    public static String getPlayerInImage(GameCharacter me,GameCharacter other){
+        String myName=me.getName();
+        String otherName=other.getName();
+
         if(myName.equals("멀린")){
-            for(Player other:list){
-                String otherName=other.getGameCharacter().getName();
-                if(!otherName.equals("멀린")){
-                    if(otherName.equals("일반선")||otherName.equals("파시발")){
-                        
-                    }
-                }
+            if(otherName.equals("멀린")){
+                return "merlin";
+            }
+            else if(otherName.equals("암살자")||otherName.equals("일반악") || otherName.equals("오베론")){
+                return "normalevil2";
             }
         }
+        else if(myName.equals("파시발")){
+            if(otherName.equals("파시발")){
+                return "par";
+            }
+            else if(otherName.equals("멀린")||otherName.equals("모르가나")){
+                return "merlin";
+            }
+        }
+        else if(myName.equals("암살자")){
+            if(otherName.equals("암살자")){
+                return "assassin";
+            }
+            else if(otherName.equals("일반악") || otherName.equals("모드레드") || otherName.equals("모르가나")){
+                return "normalevil1";
+            }
+        }
+        else if(myName.equals("일반악")){
+            if(otherName.equals("일반악")){
+                return "normalevil2";
+            }
+            else if(otherName.equals("암살자") || otherName.equals("모드레드") || otherName.equals("모르가나")){
+                return "normalevil1";
+            }
+        }
+        else if(myName.equals("모드레드")){
+            if(otherName.equals("모드레드")){
+                return "mordred";
+            }
+            else if(otherName.equals("일반악") || otherName.equals("모르가나") || otherName.equals("암살자")){
+                return "normalevil1";
+            }
+        }
+        else if(myName.equals("모르가나")){
+            if(otherName.equals("모르가나")){
+                return "mor";
+            }
+            else if(otherName.equals("일반악")||otherName.equals("모드레드") || otherName.equals("암살자")){
+                return "normalevil2";
+            }
+        }
+        else if(myName.equals("오베론")){
+            if(otherName.equals("오베론")){
+                return "oberon";
+            }
+        }
+        return "que";
     }
 }
