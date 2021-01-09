@@ -72,17 +72,29 @@ public class SocketController {
         Game game=room.getGame();
         int turn=game.getNowTurn();
         ArrayList<String> users=game.getUserStrings();
-        String now="";
+        ArrayList<Player> players=game.getPlayerList();
+        String msg=String.format("%s가 선택되었습니다",messageDto.getChoiceId());
         for(int i=0;i<users.size();i++){
-            if(i+1==turn){
-                now=users.get(i);
+            if(messageDto.getChoiceId().equals(users.get(i))){
+                game.changeCheck(i);
+                if(!game.getChecked().get(i)){
+                    msg=String.format("%s가 제외되었습니다",messageDto.getChoiceId());
+                }
+
+
+                break;
             }
         }
-        if(now.equals(messageDto.getUserId())){
-            template.convertAndSend("");
-        }
-        else{
-            template.convertAndSend("");
+
+        for(Player player:players){
+            CharacterDto characterDto=new CharacterDto();
+            characterDto.setMsg(msg);
+            characterDto.setImages(player.getImages());
+            characterDto.setUsers(users);
+            characterDto.setChecked(game.getChecked());
+            template.convertAndSend("/topic/choice/"+messageDto.getRoomId()
+                    +"/"+player.getUserId(),characterDto);
+            //characterDto.setNowTurnId();
         }
     }
 
@@ -90,10 +102,14 @@ public class SocketController {
     public void start(MessageDto messageDto){
         Room room=manager.getRoomById(messageDto.getRoomId());
         Game game=room.getGame();
-        ArrayList<Player> playerList=game.makeRole(room.getUserList(),room.getRule());
         if(game.getStateEnum()== StateEnum.Init){
             game.setStateEnum(StateEnum.Choice);
         }
+        else{
+            return;
+        }
+        ArrayList<Player> playerList=game.makeRole(room.getUserList(),room.getRule());
+
         //System.out.println("플에이어 사이즈"+playerList.size());
         String msg="턴순서는: ";
         ArrayList<String> userIds=new ArrayList<>();
@@ -102,11 +118,12 @@ public class SocketController {
             userIds.add(player.getUserId());
         }
 
-
+        String nowTurnId=playerList.get(0).getUserId();
         for(Player player:playerList){
             CharacterDto characterDto=new CharacterDto();
             characterDto.setMsg(msg);
             characterDto.setUsers(userIds);
+            characterDto.setNowTurnId(nowTurnId);
             characterDto.setImages(player.getImages());
             String userId=player.getUserId();
             template.convertAndSend("/topic/start"+messageDto.getRoomId()+"/"+userId

@@ -16,7 +16,7 @@ public class Game {
     private StateEnum stateEnum;
     private Hashtable<String,Player> table;
     private ArrayList<Player> playerList;
-    private ArrayList<String> image;
+    //private ArrayList<String> image;
     private ArrayList<String> userStrings;
     private ArrayList<Boolean> checked;
     private int turn;
@@ -30,7 +30,7 @@ public class Game {
         //playerList=new ArrayList<>();
     }
     public ArrayList<String> getUserStrings(){return userStrings;}
-    public ArrayList<String> getImage(){return image;}
+    //public ArrayList<String> getImage(){return image;}
 
     public StateEnum getStateEnum(){
         return stateEnum;
@@ -38,6 +38,10 @@ public class Game {
 
     public void setStateEnum(StateEnum stateEnum){
         this.stateEnum=stateEnum;
+    }
+    public ArrayList<Boolean> getChecked(){return checked;}
+    public void changeCheck(int num){
+        checked.set(num,!checked.get(num));
     }
 
     // 게임 룰에 맞춰 캐릭터를 정하고 사용자에게 역할을 랜덤하게 부여하고 이미지도 준다
@@ -50,6 +54,7 @@ public class Game {
             Player player=new Player(i+1,users.get(i).getUserId());
             player.setGameCharacter(characters.get(i));
             table.put(users.get(i).getUserId(),player);
+            checked.add(false);
         }
 
         ArrayList<Player> players=new ArrayList<>();
@@ -76,9 +81,9 @@ public class Game {
                 }
             }
             players.get(i).setImages(images);
-            this.image=images;
-            playerList=players;
+            //this.image=images;
         }
+        playerList=players;
         return playerList;
     }
 

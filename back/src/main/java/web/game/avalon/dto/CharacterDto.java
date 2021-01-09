@@ -13,6 +13,7 @@ public class CharacterDto {
     private ArrayList<Boolean> checked;
     private Boolean isTurn;
     private String msg;
+    private String nowTurnId;
 
     public CharacterDto(){
         users=new ArrayList<>();

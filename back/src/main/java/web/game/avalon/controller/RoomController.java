@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import web.game.avalon.dto.RoomDto;
 import web.game.avalon.dto.UserDto;
+import web.game.avalon.game.Game;
 import web.game.avalon.game.Room;
 import web.game.avalon.game.RoomManager;
+import web.game.avalon.game.state.StateEnum;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,10 @@ public class RoomController {
         //System.out.println(roomId);
 
         Room room=roomManager.getRoomById(roomId);
+        Game game=room.getGame();
+        if(game.getStateEnum()!= StateEnum.Init){
+            return "max";
+        }
         if(!room.isDuplicationMember(userId)) return "duplication";
         return room.isEnter();
 
