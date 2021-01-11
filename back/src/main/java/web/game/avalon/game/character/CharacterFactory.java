@@ -1,5 +1,6 @@
 package web.game.avalon.game.character;
 
+import web.game.avalon.dto.UserDto;
 import web.game.avalon.game.Player;
 
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class CharacterFactory {
         return list;
     }
 
-    public static String getPlayerInImage(GameCharacter me,GameCharacter other){
+    private static String getPlayerInImage(GameCharacter me,GameCharacter other){
         String myName=me.getName();
         String otherName=other.getName();
 
@@ -150,5 +151,27 @@ public class CharacterFactory {
             }
         }
         return "que";
+    }
+
+    public static void setPersonalImages(ArrayList<UserDto> users,ArrayList<Player> playerList){
+        for(int i=0;i<users.size();i++){
+            ArrayList<String> images=new ArrayList<>();
+            for(int j=0;j<users.size();j++){
+                if(playerList.get(i).getGameCharacter().getName().equals("일반선")){
+                    if(i==j){
+                        images.add("normalgood1");
+                    }
+                    else{
+                        images.add("que");
+                    }
+                }
+                else{
+                    images.add(
+                            CharacterFactory.getPlayerInImage(playerList.get(i).getGameCharacter()
+                                    ,playerList.get(j).getGameCharacter()));
+                }
+            }
+            playerList.get(i).setImages(images);
+        }
     }
 }

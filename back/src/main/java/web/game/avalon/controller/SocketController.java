@@ -67,21 +67,36 @@ public class SocketController {
 
     @MessageMapping("/choice")
     public void choice(MessageDto messageDto){
-        String userId=messageDto.getUserId();
         Room room=manager.getRoomById(messageDto.getRoomId());
         Game game=room.getGame();
-        int turn=game.getNowTurn();
-        ArrayList<String> users=game.getUserStrings();
+
+        ArrayList<String> users=game.getUserListString();
         ArrayList<Player> players=game.getPlayerList();
         String msg=String.format("%s가 선택되었습니다",messageDto.getChoiceId());
         for(int i=0;i<users.size();i++){
             if(messageDto.getChoiceId().equals(users.get(i))){
-                game.changeCheck(i);
-                if(!game.getChecked().get(i)){
+                //중복 X
+                if(!game.isDuplicationMember(players.get(i))){
+                    //Full
+                    if(game.isExpeditionMax()){
+                        msg="원정대가 인원수를 초과 하였습니다";
+                    }
+                    else{ //추가
+                        game.changeCheck(i);
+                        game.addRoundUser(players.get(i));
+                        if(game.isExpeditionMax()){
+                            msg+="\n원정대를 모두 선정하였습니다";
+                        }
+                    }
+                }//중복 O
+                else{
+                    game.changeCheck(i);
+                    game.deleteRoundUser(players.get(i));
                     msg=String.format("%s가 제외되었습니다",messageDto.getChoiceId());
+//                    if(!game.isUserChecked(i)){
+//                        msg=String.format("%s가 제외되었습니다",messageDto.getChoiceId());
+//                    }
                 }
-
-
                 break;
             }
         }
@@ -91,23 +106,32 @@ public class SocketController {
             characterDto.setMsg(msg);
             characterDto.setImages(player.getImages());
             characterDto.setUsers(users);
-            characterDto.setChecked(game.getChecked());
+            characterDto.setChecked(game.getCheckedList());
             template.convertAndSend("/topic/choice/"+messageDto.getRoomId()
                     +"/"+player.getUserId(),characterDto);
             //characterDto.setNowTurnId();
         }
     }
 
+    @MessageMapping("/expeditionMemberFull")
+    public void expeditionMemberFull(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+        if(!game.getPlayerList().get(game.getNowTurn()-1).getUserId()
+                .equals(messageDto.getUserId())) return;
+        if(game.getStateEnum()!=StateEnum.Choice) return;
+        game.setStateEnum(StateEnum.ChoiceComplete);
+
+        template.convertAndSend("/topic/expeditionMemberFull/"+messageDto.getRoomId(),
+                "원정대 멤버선정이 완료 되었습니다 찬성/반대 투표를 하세요");
+    }
+
     @MessageMapping("/start")
     public void start(MessageDto messageDto){
         Room room=manager.getRoomById(messageDto.getRoomId());
         Game game=room.getGame();
-        if(game.getStateEnum()== StateEnum.Init){
-            game.setStateEnum(StateEnum.Choice);
-        }
-        else{
-            return;
-        }
+        if(game.getStateEnum()!=StateEnum.Init) return;
+        game.setStateEnum(StateEnum.Choice);
         ArrayList<Player> playerList=game.makeRole(room.getUserList(),room.getRule());
 
         //System.out.println("플에이어 사이즈"+playerList.size());

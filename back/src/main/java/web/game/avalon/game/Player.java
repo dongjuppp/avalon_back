@@ -15,6 +15,7 @@ public class Player {
     private int turnNumber;
     private GameCharacter gameCharacter;
     private ArrayList<String> images;
+    private Boolean checked;
 
 
     public Player(){}
@@ -22,5 +23,6 @@ public class Player {
     public Player(int turnNumber,String userId){
         this.turnNumber=turnNumber;
         this.userId=userId;
+        this.checked=false;
     }
 }
