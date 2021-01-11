@@ -7,10 +7,12 @@ import web.game.avalon.game.state.StateEnum;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Hashtable;
 
 public class Game {
     private StateEnum stateEnum;
     private ArrayList<Player> playerList;
+    private Hashtable<String,Player> playerTable;
     private int turn;
     private Round round;
     private int rule;
@@ -19,12 +21,17 @@ public class Game {
         stateEnum=StateEnum.Init;
         playerList=new ArrayList<>();
         round=new Round();
+        playerTable=new Hashtable<>();
     }
 
     public ArrayList<String> getUserListString(){
         ArrayList<String> tmp=new ArrayList<>();
         playerList.forEach(player -> tmp.add(player.getUserId()));
         return tmp;
+    }
+
+    public void setPlayerProsAndCons(String player,boolean b){
+        playerTable.get(player).setProAndCons(b);
     }
 
     public StateEnum getStateEnum(){
@@ -76,6 +83,7 @@ public class Game {
             Player player=new Player(i+1,users.get(i).getUserId());
             player.setGameCharacter(characters.get(i));
             playerList.add(player);
+            playerTable.put(player.getUserId(),player);
         }
 
         //역할에 따른 이미지 부여

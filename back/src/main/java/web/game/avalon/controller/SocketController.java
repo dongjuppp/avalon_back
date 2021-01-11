@@ -2,6 +2,7 @@ package web.game.avalon.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -45,7 +46,7 @@ public class SocketController {
         room.addUser(userDto);
 
         String msg=String.format("%s 입장",messageDto.getUserId());
-        logger.debug(String.format("%s가 %s방에 입장",messageDto.getUserId(),messageDto.getRoomId()));
+        logger.info(String.format("%s가 %s방에 입장",messageDto.getUserId(),messageDto.getRoomId()));
         messageDto.setMsg(msg);
         messageDto.setImage("que");
         messageDto.setUsers(room.getUserList());
@@ -124,6 +125,44 @@ public class SocketController {
 
         template.convertAndSend("/topic/expeditionMemberFull/"+messageDto.getRoomId(),
                 "원정대 멤버선정이 완료 되었습니다 찬성/반대 투표를 하세요");
+    }
+
+    @MessageMapping("/prosAndConsEnd")
+    public void prosAndConsEnd(MessageDto messageDto){
+//        Room room=manager.getRoomById(messageDto.getRoomId());
+//        Game game=room.getGame();
+//        if(game.getStateEnum()!=StateEnum.ChoiceComplete) return;
+//        if(!game.getPlayerList().get(game.getNowTurn()-1).getUserId()
+//                .equals(messageDto.getUserId())) return;
+//        game.setStateEnum(StateEnum.Expedition);
+
+        template.convertAndSend("/topic/expeditionMsg/"+messageDto.getRoomId(),
+                "원정대");
+    }
+
+    /*
+    * @Todo 찬성반대 투표를 모두 했으면 완료 메세지를 보내줄것
+    * */
+    @MessageMapping("/expeditionAgree")
+    public void expeditionAgree(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+        String msg=String.format("%s가 찬성/반대 투표를 하였습니다",messageDto.getUserId());
+        logger.info(msg);
+        game.setPlayerProsAndCons(messageDto.getUserId(),true);
+        template.convertAndSend("/topic/expeditionMsg/"+messageDto.getRoomId(),
+                msg);
+    }
+
+    @MessageMapping("/expeditionDisAgree")
+    public void expeditionDisAgree(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+        String msg=String.format("%s가 찬성/반대 투표를 하였습니다",messageDto.getUserId());
+        game.setPlayerProsAndCons(messageDto.getUserId(),false);
+        logger.info(msg);
+        template.convertAndSend("/topic/expeditionMsg/"+messageDto.getRoomId(),
+                msg);
     }
 
     @MessageMapping("/start")

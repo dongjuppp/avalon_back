@@ -16,6 +16,7 @@ public class Player {
     private GameCharacter gameCharacter;
     private ArrayList<String> images;
     private Boolean checked;
+    private Boolean proAndCons;
 
 
     public Player(){}
