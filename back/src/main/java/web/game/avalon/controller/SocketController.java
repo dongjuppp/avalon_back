@@ -84,7 +84,7 @@ public class SocketController {
                     }
                     else{ //추가
                         game.changeCheck(i);
-                        game.plusChoiceCount();
+
                         game.addRoundUser(players.get(i));
                         if(game.isExpeditionMax()){
                             msg+="\n원정대를 모두 선정하였습니다";
@@ -94,7 +94,7 @@ public class SocketController {
                 else{
                     game.changeCheck(i);
                     game.deleteRoundUser(players.get(i));
-                    game.minusChoicecount();
+
                     msg=String.format("%s가 제외되었습니다",messageDto.getChoiceId());
                 }
                 break;
@@ -111,6 +111,47 @@ public class SocketController {
                     +"/"+player.getUserId(),characterDto);
             //characterDto.setNowTurnId();
         }
+    }
+
+    @MessageMapping("/expeditionEnd")
+    public void expeditionEnd(MessageDto messageDto){
+        Game game=manager.getRoomById(messageDto.getRoomId()).getGame();
+        if(game.getStateEnum()!=StateEnum.Expedition)return;
+        if(!game.getPlayerList().get(game.getNowTurn()).getUserId().equals(messageDto.getUserId()))return;
+        String msg="";
+        if(game.isWinRound()){
+            msg=String.format("%d 라운드는 선의 승리입니다<br/>",game.getNowRound());
+        }
+        else{
+            msg=String.format("%d 라운드는 선의 패배입니다<br/>",game.getNowRound());
+        }
+        game.setNextTurn();
+        game.initCheck();
+        game.initRoundUser();
+        game.setStateEnum(StateEnum.Choice);
+        msg+=String.format("<br/>다음 왕관은 %s 입니다",game.getPlayerList().get(game.getNowTurn()).getUserId());
+        template.convertAndSend("/topic/expeditionEnd/"+messageDto.getRoomId(),msg);
+        sendInitImage(messageDto);
+    }
+
+    @MessageMapping("/expeditionWin")
+    public void expeditionWin(MessageDto messageDto){
+        Game game=manager.getRoomById(messageDto.getRoomId()).getGame();
+        if(game.getStateEnum()!=StateEnum.Expedition)return;
+        if(!game.isExpeditionMember(messageDto.getUserId())) return;
+        game.voteExpedition(messageDto.getUserId(),true);
+        template.convertAndSend("/topic/voteWinLose/"+messageDto.getRoomId(),
+                String.format("%s가 성공/실패 투표를 하였습니다",messageDto.getUserId()));
+    }
+
+    @MessageMapping("/expeditionLose")
+    public void expeditionLose(MessageDto messageDto){
+        Game game=manager.getRoomById(messageDto.getRoomId()).getGame();
+        if(!game.isExpeditionMember(messageDto.getUserId())) return;
+        if(game.getStateEnum()!=StateEnum.Expedition)return;
+        game.voteExpedition(messageDto.getUserId(),false);
+        template.convertAndSend("/topic/voteWinLose/"+messageDto.getRoomId(),
+                String.format("%s가 성공/실패 투표를 하였습니다",messageDto.getUserId()));
     }
 
     @MessageMapping("/expeditionMemberFull")
@@ -140,22 +181,24 @@ public class SocketController {
             }
             else msg+=String.format("%s: 반대<br/>",player.getUserId());
         }
-        game.setNextTurn();
+
         game.initCheck(); //원정대 선택되었음을 초기화?
-        game.initRoundUser();
+
         if(count>game.getPlayerList().size()/2){
             msg+="<br/>결과: 원정대 출발<br/>원정대는 성공/실패 투표를하세요<br/>";
             game.setStateEnum(StateEnum.Expedition);
             messageDto.setResult(1);
         }
         else{
+            game.setNextTurn();
             msg+="<br/>결과: 원정대 출발 불가<br/>";
             messageDto.setRule(0);
             game.setStateEnum(StateEnum.Choice);
             sendInitImage(messageDto);
+            game.initRoundUser();
+            msg+=String.format("<br/>다음 왕관은 %s 입니다",game.getPlayerList().get(game.getNowTurn()).getUserId());
         }
 
-        msg+=String.format("<br/>다음 왕관은 %s 입니다",game.getPlayerList().get(game.getNowTurn()).getUserId());
         messageDto.setMsg(msg);
         template.convertAndSend("/topic/prosAndConsResult/"+messageDto.getRoomId(),
                 messageDto);

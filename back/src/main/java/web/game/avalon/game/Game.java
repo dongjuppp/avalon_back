@@ -16,21 +16,24 @@ public class Game {
     private int turn;
     private Round round;
     private int rule;
-    private int choiceCount;
+
 
     public Game(){
         stateEnum=StateEnum.Init;
         playerList=new ArrayList<>();
         round=new Round();
         playerTable=new Hashtable<>();
-        choiceCount=0;
+
     }
+
+    //
+    public void voteExpedition(String userId,boolean isWin){
+        round.getPlayerById(userId).setProAndCons(isWin);
+    }
+
     public void initRoundUser(){round.initTable();}
 
-    public void plusChoiceCount(){
-        choiceCount++;
-    }
-    public void minusChoicecount(){choiceCount--;}
+
 
     public boolean isMemberFull(){return round.isMemberFull();}
 
@@ -38,14 +41,6 @@ public class Game {
         ArrayList<String> tmp=new ArrayList<>();
         playerList.forEach(player -> tmp.add(player.getUserId()));
         return tmp;
-    }
-
-    public boolean getProsAndConsResult(){
-        int count=0;
-        for(Player player:playerList){
-            if(player.getProAndCons()) count++;
-        }
-        return count>(playerList.size()/2);
     }
 
     public void setPlayerProsAndCons(String player,boolean b){
@@ -66,6 +61,31 @@ public class Game {
 
     public boolean isDuplicationMember(Player player){
         return round.isDuplicationMember(player);
+    }
+
+    public boolean isExpeditionMember(String userId){
+        return round.isMember(playerTable.get(userId));
+    }
+
+    public boolean isWinRound(){
+        int count=0;
+        for(Player player:playerList){
+            if(round.getNowRound()!=4){
+                if(round.isMember(player)){
+                    if(!player.getProAndCons()) return false;
+                }
+            }
+            else{
+                if(round.isMember(player)){
+                    if(!player.getProAndCons()) count++;
+                }
+            }
+        }
+        return count<2;
+    }
+
+    public int getNowRound(){
+        return round.getNowRound();
     }
 
     public void addRoundUser(Player player){

@@ -27,6 +27,12 @@ public class Round {
         return table.size()==max.get(nowRound);
     }
 
+    int getNowRound(){return nowRound;}
+
+    Player getPlayerById(String userId){
+        return table.get(userId);
+    }
+
     void setRule(int rule){
         this.rule=rule;
         Integer[] one={2,3,2,3,3};
@@ -55,6 +61,8 @@ public class Round {
     boolean isDuplicationMember(Player player){
         return table.get(player.getUserId())!=null;
     }
+
+
 
     public void addUser(Player player){
         table.put(player.getUserId(),player);
