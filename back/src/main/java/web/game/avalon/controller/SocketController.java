@@ -77,13 +77,14 @@ public class SocketController {
         for(int i=0;i<users.size();i++){
             if(messageDto.getChoiceId().equals(users.get(i))){
                 //중복 X
-                if(!game.isDuplicationMember(players.get(i))){
+                if(!game.isDuplicationMember(players.get(i))){ //Round 를 통해 확인
                     //Full
                     if(game.isExpeditionMax()){
                         msg="원정대가 인원수를 초과 하였습니다";
                     }
                     else{ //추가
                         game.changeCheck(i);
+                        game.plusChoiceCount();
                         game.addRoundUser(players.get(i));
                         if(game.isExpeditionMax()){
                             msg+="\n원정대를 모두 선정하였습니다";
@@ -93,10 +94,8 @@ public class SocketController {
                 else{
                     game.changeCheck(i);
                     game.deleteRoundUser(players.get(i));
+                    game.minusChoicecount();
                     msg=String.format("%s가 제외되었습니다",messageDto.getChoiceId());
-//                    if(!game.isUserChecked(i)){
-//                        msg=String.format("%s가 제외되었습니다",messageDto.getChoiceId());
-//                    }
                 }
                 break;
             }
@@ -116,12 +115,12 @@ public class SocketController {
 
     @MessageMapping("/expeditionMemberFull")
     public void expeditionMemberFull(MessageDto messageDto){
-        Room room=manager.getRoomById(messageDto.getRoomId());
-        Game game=room.getGame();
-        if(!game.getPlayerList().get(game.getNowTurn()-1).getUserId()
-                .equals(messageDto.getUserId())) return;
+        Game game=getGame(messageDto);
+        if(game==null) return;
         if(game.getStateEnum()!=StateEnum.Choice) return;
+        if(!game.isMemberFull()) return;
         game.setStateEnum(StateEnum.ChoiceComplete);
+
 
         template.convertAndSend("/topic/expeditionMemberFull/"+messageDto.getRoomId(),
                 "원정대 멤버선정이 완료 되었습니다 찬성/반대 투표를 하세요");
@@ -129,20 +128,39 @@ public class SocketController {
 
     @MessageMapping("/prosAndConsEnd")
     public void prosAndConsEnd(MessageDto messageDto){
-//        Room room=manager.getRoomById(messageDto.getRoomId());
-//        Game game=room.getGame();
-//        if(game.getStateEnum()!=StateEnum.ChoiceComplete) return;
-//        if(!game.getPlayerList().get(game.getNowTurn()-1).getUserId()
-//                .equals(messageDto.getUserId())) return;
-//        game.setStateEnum(StateEnum.Expedition);
+        Game game=getGame(messageDto);
+        if(game==null) return;
+        if(game.getStateEnum()!=StateEnum.ChoiceComplete) return;
+        String msg="";
+        int count=0;
+        for(Player player:game.getPlayerList()){
+            if(player.getProAndCons()){
+                msg+=String.format("%s: 찬성<br/>",player.getUserId());
+                count++;
+            }
+            else msg+=String.format("%s: 반대<br/>",player.getUserId());
+        }
+        game.setNextTurn();
+        game.initCheck(); //원정대 선택되었음을 초기화?
+        game.initRoundUser();
+        if(count>game.getPlayerList().size()/2){
+            msg+="<br/>결과: 원정대 출발<br/>원정대는 성공/실패 투표를하세요<br/>";
+            game.setStateEnum(StateEnum.Expedition);
+            messageDto.setResult(1);
+        }
+        else{
+            msg+="<br/>결과: 원정대 출발 불가<br/>";
+            messageDto.setRule(0);
+            game.setStateEnum(StateEnum.Choice);
+            sendInitImage(messageDto);
+        }
 
-        template.convertAndSend("/topic/expeditionMsg/"+messageDto.getRoomId(),
-                "원정대");
+        msg+=String.format("<br/>다음 왕관은 %s 입니다",game.getPlayerList().get(game.getNowTurn()).getUserId());
+        messageDto.setMsg(msg);
+        template.convertAndSend("/topic/prosAndConsResult/"+messageDto.getRoomId(),
+                messageDto);
     }
 
-    /*
-    * @Todo 찬성반대 투표를 모두 했으면 완료 메세지를 보내줄것
-    * */
     @MessageMapping("/expeditionAgree")
     public void expeditionAgree(MessageDto messageDto){
         Room room=manager.getRoomById(messageDto.getRoomId());
@@ -193,6 +211,32 @@ public class SocketController {
                     ,characterDto);
         }
 
+    }
+
+    public void sendInitImage(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+        //ArrayList<Player> players=game.getPlayerList();
+        String nowTurnId=game.getNowTurnId();
+
+
+        for(Player player:game.getPlayerList()){
+            CharacterDto characterDto=new CharacterDto();
+            characterDto.setNowTurnId(nowTurnId);
+            characterDto.setImages(player.getImages());
+            characterDto.setUsers(game.getUserListString());
+            template.convertAndSend("/topic/initImage/"+messageDto.getRoomId()+"/"+player.getUserId(),
+                    characterDto);
+        }
+
+    }
+
+    private Game getGame(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+        if(!game.getPlayerList().get(game.getNowTurn()).getUserId()
+                .equals(messageDto.getUserId())) return null;
+        return game;
     }
 
 

@@ -16,18 +16,36 @@ public class Game {
     private int turn;
     private Round round;
     private int rule;
+    private int choiceCount;
 
     public Game(){
         stateEnum=StateEnum.Init;
         playerList=new ArrayList<>();
         round=new Round();
         playerTable=new Hashtable<>();
+        choiceCount=0;
     }
+    public void initRoundUser(){round.initTable();}
+
+    public void plusChoiceCount(){
+        choiceCount++;
+    }
+    public void minusChoicecount(){choiceCount--;}
+
+    public boolean isMemberFull(){return round.isMemberFull();}
 
     public ArrayList<String> getUserListString(){
         ArrayList<String> tmp=new ArrayList<>();
         playerList.forEach(player -> tmp.add(player.getUserId()));
         return tmp;
+    }
+
+    public boolean getProsAndConsResult(){
+        int count=0;
+        for(Player player:playerList){
+            if(player.getProAndCons()) count++;
+        }
+        return count>(playerList.size()/2);
     }
 
     public void setPlayerProsAndCons(String player,boolean b){
@@ -43,7 +61,7 @@ public class Game {
     }
 
     public boolean isExpeditionMax(){
-        return round.isExpeditionMax();
+        return round.isMemberFull();
     }
 
     public boolean isDuplicationMember(Player player){
@@ -71,9 +89,13 @@ public class Game {
         playerList.get(num).setChecked(!playerList.get(num).getChecked());
     }
 
+    public void initCheck(){
+        playerList.forEach(player -> player.setChecked(false));
+    }
+
     // 게임 룰에 맞춰 캐릭터를 정하고 사용자에게 역할을 랜덤하게 부여하고 이미지도 준다
     public ArrayList<Player> makeRole(ArrayList<UserDto> users,int rule){
-        turn=1;
+        turn=0;
         Collections.shuffle(users);
         this.rule=rule;
         round.setRule(rule);
@@ -97,12 +119,22 @@ public class Game {
         return tmp;
     }
 
+    public void setNextTurn(){
+        int size=playerList.size();
+        if(turn+1==size) turn=0;
+        else turn++;
+    }
+
     public int getNowTurn(){
         return turn;
     }
 
     public ArrayList<Player> getPlayerList(){
         return playerList;
+    }
+
+    public String getNowTurnId(){
+        return playerList.get(turn).getUserId();
     }
 
 }

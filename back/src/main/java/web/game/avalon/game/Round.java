@@ -17,6 +17,8 @@ public class Round {
         max=new ArrayList<>();
     }
 
+    void initTable(){table=new Hashtable<>();}
+
     boolean isMember(Player player){
         return table.containsKey(player.getUserId());
     }
@@ -48,10 +50,6 @@ public class Round {
                 max=new ArrayList<>(Arrays.asList(four));
 
         }
-    }
-
-    boolean isExpeditionMax(){
-        return table.size()==max.get(nowRound);
     }
 
     boolean isDuplicationMember(Player player){

@@ -15,8 +15,8 @@ public class Player {
     private int turnNumber;
     private GameCharacter gameCharacter;
     private ArrayList<String> images;
-    private Boolean checked;
-    private Boolean proAndCons;
+    private Boolean checked; //게임에서 선택되었는지 화면에 표시하기 위함
+    private Boolean proAndCons; //찬성 반대, 성공 실패를 위함
 
 
     public Player(){}

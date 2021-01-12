@@ -16,5 +16,6 @@ public class MessageDto {
     private String image;
     private String msg;
     private int rule;
+    private int result=0;
     private ArrayList<UserDto> users;
 }
