@@ -153,6 +153,18 @@ public class CharacterFactory {
         return "que";
     }
 
+    public static String getMyImage(String job){
+        if(job.equals("오베론")) return "oberon";
+        if(job.equals("멀린")) return "merlin";
+        if(job.equals("모르가나")) return "mor";
+        if(job.equals("암살자")) return "assassin";
+        if(job.equals("일반악")) return "normalevil2";
+        if(job.equals("일반선")) return "normalgood1";
+        if(job.equals("모드레드")) return "mordred";
+        if(job.equals("파시발")) return "par";
+        return "";
+    }
+
     public static void setPersonalImages(ArrayList<UserDto> users,ArrayList<Player> playerList){
         for(int i=0;i<users.size();i++){
             ArrayList<String> images=new ArrayList<>();

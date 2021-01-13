@@ -1,5 +1,8 @@
 package web.game.avalon.game;
 
+import web.game.avalon.game.state.StateEnum;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -9,13 +12,59 @@ import java.util.Hashtable;
 public class Round {
     private Hashtable<String,Player> table;
     private int nowRound;
+    private int nowSubRound;
     private int rule;
     private ArrayList<Integer> max;
+    private ArrayList<Integer> subRound;
+    private ArrayList<Integer> mainRound;
 
     Round(){
         this.table=new Hashtable<>();
         max=new ArrayList<>();
+        Integer[] tmp={1,1,1,1,1};
+        subRound=new ArrayList<>(Arrays.asList(tmp));
+        Integer[] mainTmp={2,2,2,2,2};
+        mainRound=new ArrayList<>(Arrays.asList(mainTmp));
+        nowSubRound=0;
     }
+
+    void changeMainRound(boolean isWin){
+        if(isWin) mainRound.set(nowRound,1);
+        else mainRound.set(nowRound,0);
+        nowRound++;
+    }
+
+    void changeSubRound(){
+        if(nowSubRound<5){
+            subRound.set(nowSubRound,0);
+            nowSubRound++;
+        }
+    }
+
+    StateEnum checkEndGame(){
+        /*
+        * 서브라운드 5초과 악승리
+        * 메인 라운드 3승
+        * */
+        if(nowSubRound>=5) return StateEnum.EvilWin;
+        int good=0;
+        int evil=0;
+        for(int num:mainRound){
+            if(num==1) good++;
+            else if(num==0) evil++;
+        }
+        if(good>2) return StateEnum.GoodWin;
+        if(evil>2) return StateEnum.EvilWin;
+        return null;
+    }
+
+    void initSubRound(){
+        Integer[] tmp={1,1,1,1,1};
+        subRound=new ArrayList<>(Arrays.asList(tmp));
+    }
+
+    ArrayList<Integer> getMainRound(){return mainRound;}
+    ArrayList<Integer> getSubRound(){return subRound;}
 
     void initTable(){table=new Hashtable<>();}
 

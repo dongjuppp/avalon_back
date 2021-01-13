@@ -26,6 +26,15 @@ public class Game {
 
     }
 
+    public String getAssassinId(){
+        for(Player player:playerList){
+            if(player.getGameCharacter().getName().equals("암살자")){
+                return player.getUserId();
+            }
+        }
+        return "";
+    }
+
     //
     public void voteExpedition(String userId,boolean isWin){
         round.getPlayerById(userId).setProAndCons(isWin);
@@ -33,7 +42,8 @@ public class Game {
 
     public void initRoundUser(){round.initTable();}
 
-
+    public ArrayList<Integer> getMainRound(){return round.getMainRound();}
+    public ArrayList<Integer> getSubRound(){return round.getSubRound();}
 
     public boolean isMemberFull(){return round.isMemberFull();}
 
@@ -42,6 +52,13 @@ public class Game {
         playerList.forEach(player -> tmp.add(player.getUserId()));
         return tmp;
     }
+
+    public StateEnum checkEndGame(){return round.checkEndGame();}
+
+    public void changeSubRound(){round.changeSubRound();}
+    public void initSubRound(){round.initSubRound();}
+
+    public void changeMainRound(boolean isWin){round.changeMainRound(isWin);}
 
     public void setPlayerProsAndCons(String player,boolean b){
         playerTable.get(player).setProAndCons(b);
@@ -70,7 +87,7 @@ public class Game {
     public boolean isWinRound(){
         int count=0;
         for(Player player:playerList){
-            if(round.getNowRound()!=4){
+            if(round.getNowRound()!=3){
                 if(round.isMember(player)){
                     if(!player.getProAndCons()) return false;
                 }
@@ -82,6 +99,18 @@ public class Game {
             }
         }
         return count<2;
+    }
+
+    public String getExpeditionVote(){
+        int win=0;
+        int lose=0;
+        for(Player player:playerList){
+            if(round.isMember(player)){
+                if(player.getProAndCons()) win++;
+                else lose++;
+            }
+        }
+        return String.format("성공:%d 실패:%d<br/>",win,lose);
     }
 
     public int getNowRound(){

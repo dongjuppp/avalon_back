@@ -2,17 +2,18 @@ package web.game.avalon.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import web.game.avalon.dto.CharacterDto;
 import web.game.avalon.dto.MessageDto;
+import web.game.avalon.dto.RoundDto;
 import web.game.avalon.dto.UserDto;
 import web.game.avalon.game.Game;
 import web.game.avalon.game.Player;
 import web.game.avalon.game.Room;
 import web.game.avalon.game.RoomManager;
+import web.game.avalon.game.character.CharacterFactory;
 import web.game.avalon.game.state.StateEnum;
 
 import java.util.ArrayList;
@@ -63,6 +64,35 @@ public class SocketController {
         else{
             template.convertAndSend("/topic/exitFail/"+messageDto.getRoomId()+"/"+messageDto.getUserId(),
                     "방을 삭제하는데 실패 했습니다");
+        }
+    }
+
+    @MessageMapping("/kill")
+    public void kill(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+
+        boolean result=false;
+        String name="";
+        String job="";
+        for(Player player:game.getPlayerList()){
+            if(player.getUserId().equals(messageDto.getChoiceId())){
+                if(player.getGameCharacter().getName().equals("멀린")){
+                    result=true;
+                }
+                name=player.getUserId();
+                job=player.getGameCharacter().getName();
+            }
+
+        }
+        if(result){//암살 성공
+            template.convertAndSend("/topic/expeditionMsg/"+messageDto.getRoomId(),
+                    String.format("암살자(%s)가 멀린(%s)를 암살하였습니다<br/>게임이 종료 되었습니다",messageDto.getUserId(),name));
+            sendEndImage(messageDto);
+        }else{
+            template.convertAndSend("/topic/expeditionMsg/"+messageDto.getRoomId(),
+                    String.format("암살자(%s)가 %s(%s)를 암살하였습니다<br/>게임이 종료 되었습니다",messageDto.getUserId(),job,name));
+            sendEndImage(messageDto);
         }
     }
 
@@ -120,18 +150,27 @@ public class SocketController {
         if(!game.getPlayerList().get(game.getNowTurn()).getUserId().equals(messageDto.getUserId()))return;
         String msg="";
         if(game.isWinRound()){
-            msg=String.format("%d 라운드는 선의 승리입니다<br/>",game.getNowRound());
+            msg=String.format("%d 라운드는 선의 승리입니다<br/>",game.getNowRound()+1);
+            msg+=game.getExpeditionVote();
+            game.changeMainRound(true);
         }
         else{
-            msg=String.format("%d 라운드는 선의 패배입니다<br/>",game.getNowRound());
+            msg=String.format("%d 라운드는 선의 패배입니다<br/>",game.getNowRound()+1);
+            msg+=game.getExpeditionVote();
+            game.changeMainRound(false);
         }
+        StateEnum check=game.checkEndGame();
+        if(checkEndGame(check,messageDto,game.getAssassinId())) return;
         game.setNextTurn();
         game.initCheck();
         game.initRoundUser();
         game.setStateEnum(StateEnum.Choice);
-        msg+=String.format("<br/>다음 왕관은 %s 입니다",game.getPlayerList().get(game.getNowTurn()).getUserId());
+        msg+=String.format("<br/>다음 왕관은 %s 입니다<br/>",game.getPlayerList().get(game.getNowTurn()).getUserId());
         template.convertAndSend("/topic/expeditionEnd/"+messageDto.getRoomId(),msg);
         sendInitImage(messageDto);
+
+        game.initSubRound();
+        sendRoundImage(game.getMainRound(),game.getSubRound(),messageDto.getRoomId());
     }
 
     @MessageMapping("/expeditionWin")
@@ -164,7 +203,7 @@ public class SocketController {
 
 
         template.convertAndSend("/topic/expeditionMemberFull/"+messageDto.getRoomId(),
-                "원정대 멤버선정이 완료 되었습니다 찬성/반대 투표를 하세요");
+                "원정대 멤버선정이 완료 되었습니다 찬성/반대 투표를 하세요<br/>");
     }
 
     @MessageMapping("/prosAndConsEnd")
@@ -190,6 +229,11 @@ public class SocketController {
             messageDto.setResult(1);
         }
         else{
+            game.changeSubRound();
+            StateEnum check=game.checkEndGame();
+            if(checkEndGame(check,messageDto,game.getAssassinId())) return;
+            sendRoundImage(game.getMainRound(),game.getSubRound(),messageDto.getRoomId());
+
             game.setNextTurn();
             msg+="<br/>결과: 원정대 출발 불가<br/>";
             messageDto.setRule(0);
@@ -197,6 +241,8 @@ public class SocketController {
             sendInitImage(messageDto);
             game.initRoundUser();
             msg+=String.format("<br/>다음 왕관은 %s 입니다",game.getPlayerList().get(game.getNowTurn()).getUserId());
+
+
         }
 
         messageDto.setMsg(msg);
@@ -253,7 +299,14 @@ public class SocketController {
             template.convertAndSend("/topic/start"+messageDto.getRoomId()+"/"+userId
                     ,characterDto);
         }
+        sendRoundImage(game.getMainRound(),game.getSubRound(),messageDto.getRoomId());
+    }
 
+    private void sendRoundImage(ArrayList<Integer> mainRound,ArrayList<Integer> subRound,String roomId){
+        RoundDto roundDto=new RoundDto();
+        roundDto.setMainRound(mainRound);
+        roundDto.setSubRound(subRound);
+        template.convertAndSend("/topic/roundInfo/"+roomId,roundDto);
     }
 
     public void sendInitImage(MessageDto messageDto){
@@ -274,12 +327,48 @@ public class SocketController {
 
     }
 
+    private void sendEndImage(MessageDto messageDto){
+        Room room=manager.getRoomById(messageDto.getRoomId());
+        Game game=room.getGame();
+
+        CharacterDto characterDto=new CharacterDto();
+        ArrayList<String> images=new ArrayList<>();
+        for(Player player:game.getPlayerList()){
+            characterDto.setUsers(game.getUserListString());
+            images.add(CharacterFactory.getMyImage(player.getGameCharacter().getName()));
+        }
+        characterDto.setImages(images);
+
+        template.convertAndSend("/topic/endImage/"+messageDto.getRoomId(),characterDto);
+    }
+
     private Game getGame(MessageDto messageDto){
         Room room=manager.getRoomById(messageDto.getRoomId());
         Game game=room.getGame();
         if(!game.getPlayerList().get(game.getNowTurn()).getUserId()
                 .equals(messageDto.getUserId())) return null;
         return game;
+    }
+
+    private boolean checkEndGame(StateEnum check,MessageDto messageDto,String assassin){
+        if(check!=null){
+            MessageDto message=new MessageDto();
+            if(check==StateEnum.GoodWin){
+                message.setMsg("선의 승리입니다.<br/> 암살자는 멀린을 찾으세요!<br/>");
+                message.setUserId(assassin);
+                template.convertAndSend("/topic/endSign/"+messageDto.getRoomId(),
+                        message);
+                return true;
+            }
+            else if(check==StateEnum.EvilWin){
+                message.setMsg("악의 승리입니다<br/>게임이 종료되었습니다<br/>");
+                template.convertAndSend("/topic/endSign/"+messageDto.getRoomId(),
+                        message);
+                sendEndImage(messageDto);
+                return true;
+            }
+        }
+        return false;
     }
 
 
