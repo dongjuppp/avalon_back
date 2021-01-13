@@ -25,7 +25,8 @@ public class RoomController {
 
         ArrayList<RoomDto> dtos=new ArrayList<>();
         for(Room room:roomManager.getRooms()){
-            dtos.add(new RoomDto(room.getRoomName(),room.getRule(),room.getRoomId()));
+            if(room.getGame().getStateEnum()==StateEnum.Init)
+                dtos.add(new RoomDto(room.getRoomName(),room.getRule(),room.getRoomId()));
         }
         return dtos;
     }
