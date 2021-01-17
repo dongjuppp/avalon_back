@@ -100,7 +100,7 @@ public class SocketController {
     public void choice(MessageDto messageDto){
         Room room=manager.getRoomById(messageDto.getRoomId());
         Game game=room.getGame();
-
+        logger.info(String.format("%s가 유저를 선택 하였습니다",messageDto.getUserId()));
         ArrayList<String> users=game.getUserListString();
         ArrayList<Player> players=game.getPlayerList();
         String msg=String.format("%s가 선택되었습니다",messageDto.getChoiceId());

@@ -1,0 +1,42 @@
+2021-01-17 21:54:20.391  INFO 9024 --- [restartedMain] web.game.avalon.AvalonApplication        : Starting AvalonApplication using Java 11.0.2 on DESKTOP-K79NAJM with PID 9024 (C:\Users\msi\Desktop\avalon\avalon_back\back\target\classes started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-17 21:54:20.394  INFO 9024 --- [restartedMain] web.game.avalon.AvalonApplication        : No active profile set, falling back to default profiles: default
+2021-01-17 21:54:20.459  INFO 9024 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-01-17 21:54:20.460  INFO 9024 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-01-17 21:54:21.080  INFO 9024 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-17 21:54:21.143  INFO 9024 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 1 JPA repository interfaces.
+2021-01-17 21:54:21.543  INFO 9024 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-17 21:54:21.550  INFO 9024 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-17 21:54:21.550  INFO 9024 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-01-17 21:54:21.653  INFO 9024 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-17 21:54:21.653  INFO 9024 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1191 ms
+2021-01-17 21:54:21.705  INFO 9024 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-17 21:54:21.831  INFO 9024 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-17 21:54:21.929  INFO 9024 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-17 21:54:21.975  INFO 9024 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-17 21:54:22.071  INFO 9024 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-17 21:54:22.162  INFO 9024 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-17 21:54:22.518  INFO 9024 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-17 21:54:22.527  INFO 9024 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-17 21:54:22.834  INFO 9024 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-17 21:54:22.838  INFO 9024 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-17 21:54:22.840  INFO 9024 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-17 21:54:22.857  INFO 9024 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-17 21:54:22.930  WARN 9024 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-17 21:54:23.263  INFO 9024 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-01-17 21:54:23.291  INFO 9024 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-17 21:54:23.293  INFO 9024 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-17 21:54:23.293  INFO 9024 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7bdebd57]]
+2021-01-17 21:54:23.294  INFO 9024 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-17 21:54:23.301  INFO 9024 --- [restartedMain] web.game.avalon.AvalonApplication        : Started AvalonApplication in 3.375 seconds (JVM running for 5.087)
+2021-01-17 21:54:29.987  INFO 9024 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-01-17 21:54:29.989  INFO 9024 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-01-17 21:54:29.990  INFO 9024 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-01-17 21:54:30.483  INFO 9024 --- [clientInboundChannel-3] w.g.avalon.controller.SocketController   : iuzzang가 8jDQntE5rl방에 입장
+2021-01-17 21:55:05.954  INFO 9024 --- [clientInboundChannel-9] w.g.avalon.controller.SocketController   : suzyboji가 8jDQntE5rl방에 입장
+2021-01-17 21:55:22.896  INFO 9024 --- [MessageBroker-5] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[2 current WS(2)-HttpStream(0)-HttpPoll(0), 3 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(2)-CONNECTED(2)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 105], outboundChannel[pool size = 6, active threads = 0, queued tasks = 0, completed tasks = 6], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 3, completed tasks = 12]
+2021-01-17 21:55:48.994  INFO 9024 --- [clientInboundChannel-28] w.g.avalon.controller.SocketController   : iuzzang가 8jDQntE5rl방에 입장
+2021-01-17 21:57:55.594  INFO 9024 --- [clientInboundChannel-34] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
+2021-01-17 21:57:56.665  INFO 9024 --- [clientInboundChannel-37] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
+2021-01-17 21:57:59.057  INFO 9024 --- [clientInboundChannel-40] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
+2021-01-17 21:58:00.529  INFO 9024 --- [clientInboundChannel-43] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
+2021-01-17 21:58:01.042  INFO 9024 --- [clientInboundChannel-46] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
