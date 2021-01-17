@@ -93,7 +93,7 @@ public class CharacterFactory {
         return list;
     }
 
-    private static String getPlayerInImage(GameCharacter me,GameCharacter other){
+    public static String getPlayerInImage(GameCharacter me,GameCharacter other){
         String myName=me.getName();
         String otherName=other.getName();
 

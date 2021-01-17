@@ -1,42 +1,372 @@
-2021-01-17 21:54:20.391  INFO 9024 --- [restartedMain] web.game.avalon.AvalonApplication        : Starting AvalonApplication using Java 11.0.2 on DESKTOP-K79NAJM with PID 9024 (C:\Users\msi\Desktop\avalon\avalon_back\back\target\classes started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
-2021-01-17 21:54:20.394  INFO 9024 --- [restartedMain] web.game.avalon.AvalonApplication        : No active profile set, falling back to default profiles: default
-2021-01-17 21:54:20.459  INFO 9024 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2021-01-17 21:54:20.460  INFO 9024 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2021-01-17 21:54:21.080  INFO 9024 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2021-01-17 21:54:21.143  INFO 9024 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 1 JPA repository interfaces.
-2021-01-17 21:54:21.543  INFO 9024 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2021-01-17 21:54:21.550  INFO 9024 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-01-17 21:54:21.550  INFO 9024 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2021-01-17 21:54:21.653  INFO 9024 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-01-17 21:54:21.653  INFO 9024 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1191 ms
-2021-01-17 21:54:21.705  INFO 9024 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-01-17 21:54:21.831  INFO 9024 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-01-17 21:54:21.929  INFO 9024 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2021-01-17 21:54:21.975  INFO 9024 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
-2021-01-17 21:54:22.071  INFO 9024 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2021-01-17 21:54:22.162  INFO 9024 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2021-01-17 21:54:22.518  INFO 9024 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2021-01-17 21:54:22.527  INFO 9024 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-01-17 21:54:22.834  INFO 9024 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
-2021-01-17 21:54:22.838  INFO 9024 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
-2021-01-17 21:54:22.840  INFO 9024 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
-2021-01-17 21:54:22.857  INFO 9024 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
-2021-01-17 21:54:22.930  WARN 9024 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-01-17 21:54:23.263  INFO 9024 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2021-01-17 21:54:23.291  INFO 9024 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2021-01-17 21:54:23.293  INFO 9024 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2021-01-17 21:54:23.293  INFO 9024 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7bdebd57]]
-2021-01-17 21:54:23.294  INFO 9024 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2021-01-17 21:54:23.301  INFO 9024 --- [restartedMain] web.game.avalon.AvalonApplication        : Started AvalonApplication in 3.375 seconds (JVM running for 5.087)
-2021-01-17 21:54:29.987  INFO 9024 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-01-17 21:54:29.989  INFO 9024 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-01-17 21:54:29.990  INFO 9024 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2021-01-17 21:54:30.483  INFO 9024 --- [clientInboundChannel-3] w.g.avalon.controller.SocketController   : iuzzang가 8jDQntE5rl방에 입장
-2021-01-17 21:55:05.954  INFO 9024 --- [clientInboundChannel-9] w.g.avalon.controller.SocketController   : suzyboji가 8jDQntE5rl방에 입장
-2021-01-17 21:55:22.896  INFO 9024 --- [MessageBroker-5] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[2 current WS(2)-HttpStream(0)-HttpPoll(0), 3 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(2)-CONNECTED(2)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 105], outboundChannel[pool size = 6, active threads = 0, queued tasks = 0, completed tasks = 6], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 3, completed tasks = 12]
-2021-01-17 21:55:48.994  INFO 9024 --- [clientInboundChannel-28] w.g.avalon.controller.SocketController   : iuzzang가 8jDQntE5rl방에 입장
-2021-01-17 21:57:55.594  INFO 9024 --- [clientInboundChannel-34] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
-2021-01-17 21:57:56.665  INFO 9024 --- [clientInboundChannel-37] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
-2021-01-17 21:57:59.057  INFO 9024 --- [clientInboundChannel-40] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
-2021-01-17 21:58:00.529  INFO 9024 --- [clientInboundChannel-43] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
-2021-01-17 21:58:01.042  INFO 9024 --- [clientInboundChannel-46] w.g.avalon.controller.SocketController   : iuzzang가 유저를 선택 하였습니다
+2021-01-18 01:00:22.746  INFO 28716 --- [main] web.game.avalon.AvalonApplicationTests   : Starting AvalonApplicationTests using Java 11.0.2 on DESKTOP-K79NAJM with PID 28716 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:00:22.755  INFO 28716 --- [main] web.game.avalon.AvalonApplicationTests   : No active profile set, falling back to default profiles: default
+2021-01-18 01:00:23.469  INFO 28716 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:00:23.542  INFO 28716 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:00:23.933  INFO 28716 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:00:24.142  INFO 28716 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:00:24.342  INFO 28716 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:00:24.406  INFO 28716 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:00:24.566  INFO 28716 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:00:25.681  INFO 28716 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:00:26.294  INFO 28716 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:00:26.304  INFO 28716 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:00:26.799  INFO 28716 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:00:26.810  INFO 28716 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:00:26.813  INFO 28716 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:00:26.856  INFO 28716 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:00:26.979  WARN 28716 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:00:27.714  INFO 28716 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:00:27.715  INFO 28716 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3355d9ba]]
+2021-01-18 01:00:27.716  INFO 28716 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:00:27.722  INFO 28716 --- [main] web.game.avalon.AvalonApplicationTests   : Started AvalonApplicationTests in 5.309 seconds (JVM running for 6.341)
+2021-01-18 01:00:28.038  INFO 28716 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:00:28.039  INFO 28716 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3355d9ba]]
+2021-01-18 01:00:28.039  INFO 28716 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:00:28.041  INFO 28716 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:00:28.042  INFO 28716 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:00:28.042  INFO 28716 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:00:28.043  INFO 28716 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:00:28.043  INFO 28716 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:00:28.047  INFO 28716 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:00:28.057  INFO 28716 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:01:59.778  INFO 26504 --- [main] web.game.avalon.AvalonApplicationTests   : Starting AvalonApplicationTests using Java 11.0.2 on DESKTOP-K79NAJM with PID 26504 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:01:59.780  INFO 26504 --- [main] web.game.avalon.AvalonApplicationTests   : No active profile set, falling back to default profiles: default
+2021-01-18 01:02:00.710  INFO 26504 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:02:00.796  INFO 26504 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:02:01.250  INFO 26504 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:02:01.484  INFO 26504 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:02:01.698  INFO 26504 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:02:01.770  INFO 26504 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:02:01.959  INFO 26504 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:02:03.107  INFO 26504 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:02:03.718  INFO 26504 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:02:03.732  INFO 26504 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:02:04.313  INFO 26504 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:02:04.324  INFO 26504 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:02:04.328  INFO 26504 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:02:04.369  INFO 26504 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:02:04.516  WARN 26504 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:02:05.367  INFO 26504 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:02:05.368  INFO 26504 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75e92bb7]]
+2021-01-18 01:02:05.369  INFO 26504 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:02:05.379  INFO 26504 --- [main] web.game.avalon.AvalonApplicationTests   : Started AvalonApplicationTests in 5.966 seconds (JVM running for 7.302)
+2021-01-18 01:02:05.721  INFO 26504 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:02:05.722  INFO 26504 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75e92bb7]]
+2021-01-18 01:02:05.722  INFO 26504 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:02:05.724  INFO 26504 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:02:05.724  INFO 26504 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:02:05.724  INFO 26504 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:02:05.725  INFO 26504 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:02:05.725  INFO 26504 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:02:05.727  INFO 26504 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:02:05.735  INFO 26504 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:02:12.353  INFO 11732 --- [main] web.game.avalon.AvalonApplicationTests   : Starting AvalonApplicationTests using Java 11.0.2 on DESKTOP-K79NAJM with PID 11732 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:02:12.355  INFO 11732 --- [main] web.game.avalon.AvalonApplicationTests   : No active profile set, falling back to default profiles: default
+2021-01-18 01:02:13.271  INFO 11732 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:02:13.342  INFO 11732 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:02:13.747  INFO 11732 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:02:13.950  INFO 11732 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:02:14.162  INFO 11732 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:02:14.222  INFO 11732 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:02:14.375  INFO 11732 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:02:15.473  INFO 11732 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:02:16.029  INFO 11732 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:02:16.039  INFO 11732 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:02:16.522  INFO 11732 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:02:16.533  INFO 11732 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:02:16.536  INFO 11732 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:02:16.575  INFO 11732 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:02:16.690  WARN 11732 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:02:17.457  INFO 11732 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:02:17.458  INFO 11732 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@716eae1]]
+2021-01-18 01:02:17.459  INFO 11732 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:02:17.466  INFO 11732 --- [main] web.game.avalon.AvalonApplicationTests   : Started AvalonApplicationTests in 5.459 seconds (JVM running for 6.749)
+2021-01-18 01:02:17.766  INFO 11732 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:02:17.767  INFO 11732 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@716eae1]]
+2021-01-18 01:02:17.767  INFO 11732 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:02:17.769  INFO 11732 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:02:17.770  INFO 11732 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:02:17.770  INFO 11732 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:02:17.770  INFO 11732 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:02:17.771  INFO 11732 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:02:17.774  INFO 11732 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:02:17.783  INFO 11732 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:05:58.699  INFO 25812 --- [main] web.game.avalon.AvalonApplicationTests   : Starting AvalonApplicationTests using Java 11.0.2 on DESKTOP-K79NAJM with PID 25812 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:05:58.702  INFO 25812 --- [main] web.game.avalon.AvalonApplicationTests   : No active profile set, falling back to default profiles: default
+2021-01-18 01:05:59.763  INFO 25812 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:05:59.833  INFO 25812 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:06:00.229  INFO 25812 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:06:00.459  INFO 25812 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:06:00.673  INFO 25812 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:06:00.740  INFO 25812 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:06:00.892  INFO 25812 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:06:01.985  INFO 25812 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:06:02.539  INFO 25812 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:06:02.549  INFO 25812 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:06:03.021  INFO 25812 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:06:03.033  INFO 25812 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:06:03.035  INFO 25812 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:06:03.078  INFO 25812 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:06:03.189  WARN 25812 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:06:03.903  INFO 25812 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:06:03.903  INFO 25812 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2ebcbf9d]]
+2021-01-18 01:06:03.904  INFO 25812 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:06:03.912  INFO 25812 --- [main] web.game.avalon.AvalonApplicationTests   : Started AvalonApplicationTests in 5.596 seconds (JVM running for 6.854)
+2021-01-18 01:06:04.123  INFO 25812 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:06:04.124  INFO 25812 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2ebcbf9d]]
+2021-01-18 01:06:04.124  INFO 25812 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:06:04.126  INFO 25812 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:06:04.127  INFO 25812 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:06:04.127  INFO 25812 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:06:04.127  INFO 25812 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:06:04.128  INFO 25812 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:06:04.131  INFO 25812 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:06:04.140  INFO 25812 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:06:42.302  INFO 17780 --- [main] web.game.avalon.AvalonApplicationTests   : Starting AvalonApplicationTests using Java 11.0.2 on DESKTOP-K79NAJM with PID 17780 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:06:42.306  INFO 17780 --- [main] web.game.avalon.AvalonApplicationTests   : No active profile set, falling back to default profiles: default
+2021-01-18 01:06:43.267  INFO 17780 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:06:43.375  INFO 17780 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:06:43.792  INFO 17780 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:06:44.011  INFO 17780 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:06:44.220  INFO 17780 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:06:44.283  INFO 17780 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:06:44.433  INFO 17780 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:06:45.520  INFO 17780 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:06:46.078  INFO 17780 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:06:46.088  INFO 17780 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:06:46.565  INFO 17780 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:06:46.578  INFO 17780 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:06:46.581  INFO 17780 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:06:46.623  INFO 17780 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:06:46.742  WARN 17780 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:06:47.477  INFO 17780 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:06:47.478  INFO 17780 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2ebcbf9d]]
+2021-01-18 01:06:47.479  INFO 17780 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:06:47.486  INFO 17780 --- [main] web.game.avalon.AvalonApplicationTests   : Started AvalonApplicationTests in 5.592 seconds (JVM running for 6.744)
+2021-01-18 01:06:47.765  INFO 17780 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:06:47.766  INFO 17780 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2ebcbf9d]]
+2021-01-18 01:06:47.766  INFO 17780 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:06:47.768  INFO 17780 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:06:47.769  INFO 17780 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:06:47.769  INFO 17780 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:06:47.769  INFO 17780 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:06:47.770  INFO 17780 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:06:47.772  INFO 17780 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:06:47.781  INFO 17780 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:07:01.639  INFO 31876 --- [main] web.game.avalon.AvalonApplicationTests   : Starting AvalonApplicationTests using Java 11.0.2 on DESKTOP-K79NAJM with PID 31876 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:07:01.642  INFO 31876 --- [main] web.game.avalon.AvalonApplicationTests   : No active profile set, falling back to default profiles: default
+2021-01-18 01:07:02.674  INFO 31876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:07:02.756  INFO 31876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:07:03.126  INFO 31876 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:07:03.352  INFO 31876 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:07:03.570  INFO 31876 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:07:03.629  INFO 31876 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:07:03.775  INFO 31876 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:07:04.850  INFO 31876 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:07:05.430  INFO 31876 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:07:05.441  INFO 31876 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:07:05.951  INFO 31876 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:07:05.963  INFO 31876 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:07:05.965  INFO 31876 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:07:06.004  INFO 31876 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:07:06.118  WARN 31876 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:07:06.937  INFO 31876 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:07:06.937  INFO 31876 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2ebcbf9d]]
+2021-01-18 01:07:06.938  INFO 31876 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:07:06.946  INFO 31876 --- [main] web.game.avalon.AvalonApplicationTests   : Started AvalonApplicationTests in 5.72 seconds (JVM running for 7.024)
+2021-01-18 01:07:07.221  INFO 31876 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:07:07.222  INFO 31876 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2ebcbf9d]]
+2021-01-18 01:07:07.222  INFO 31876 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:07:07.224  INFO 31876 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:07:07.225  INFO 31876 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:07:07.225  INFO 31876 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:07:07.226  INFO 31876 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:07:07.226  INFO 31876 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:07:07.228  INFO 31876 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:07:07.237  INFO 31876 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:23:29.127  INFO 15568 --- [main] web.game.avalon.CharacterFactoryTest     : Starting CharacterFactoryTest using Java 11.0.2 on DESKTOP-K79NAJM with PID 15568 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:23:29.130  INFO 15568 --- [main] web.game.avalon.CharacterFactoryTest     : No active profile set, falling back to default profiles: default
+2021-01-18 01:23:30.173  INFO 15568 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:23:30.266  INFO 15568 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:23:30.672  INFO 15568 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:23:30.878  INFO 15568 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:23:31.073  INFO 15568 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:23:31.131  INFO 15568 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:23:31.276  INFO 15568 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:23:32.370  INFO 15568 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:23:32.936  INFO 15568 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:23:32.946  INFO 15568 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:23:33.428  INFO 15568 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:23:33.440  INFO 15568 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:23:33.443  INFO 15568 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:23:33.491  INFO 15568 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:23:33.633  WARN 15568 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:23:34.375  INFO 15568 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:23:34.375  INFO 15568 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:23:34.376  INFO 15568 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:23:34.382  INFO 15568 --- [main] web.game.avalon.CharacterFactoryTest     : Started CharacterFactoryTest in 5.599 seconds (JVM running for 6.699)
+2021-01-18 01:23:34.606  INFO 15568 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:23:34.607  INFO 15568 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:23:34.608  INFO 15568 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:23:34.610  INFO 15568 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:23:34.610  INFO 15568 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:23:34.610  INFO 15568 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:23:34.611  INFO 15568 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:23:34.611  INFO 15568 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:23:34.614  INFO 15568 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:23:34.624  INFO 15568 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:25:45.535  INFO 19544 --- [main] web.game.avalon.CharacterFactoryTest     : Starting CharacterFactoryTest using Java 11.0.2 on DESKTOP-K79NAJM with PID 19544 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:25:45.538  INFO 19544 --- [main] web.game.avalon.CharacterFactoryTest     : No active profile set, falling back to default profiles: default
+2021-01-18 01:25:46.562  INFO 19544 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:25:46.649  INFO 19544 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 76 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:25:47.048  INFO 19544 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:25:47.285  INFO 19544 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:25:47.532  INFO 19544 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:25:47.601  INFO 19544 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:25:47.765  INFO 19544 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:25:48.857  INFO 19544 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:25:49.418  INFO 19544 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:25:49.429  INFO 19544 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:25:49.942  INFO 19544 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:25:49.954  INFO 19544 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:25:49.957  INFO 19544 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:25:50.005  INFO 19544 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:25:50.129  WARN 19544 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:25:50.918  INFO 19544 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:25:50.918  INFO 19544 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:25:50.920  INFO 19544 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:25:50.929  INFO 19544 --- [main] web.game.avalon.CharacterFactoryTest     : Started CharacterFactoryTest in 5.797 seconds (JVM running for 7.025)
+2021-01-18 01:25:51.157  INFO 19544 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:25:51.158  INFO 19544 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:25:51.158  INFO 19544 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:25:51.160  INFO 19544 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:25:51.161  INFO 19544 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:25:51.162  INFO 19544 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:25:51.162  INFO 19544 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:25:51.163  INFO 19544 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:25:51.165  INFO 19544 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:25:51.174  INFO 19544 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:31:43.751  INFO 9152 --- [main] web.game.avalon.CharacterFactoryTest     : Starting CharacterFactoryTest using Java 11.0.2 on DESKTOP-K79NAJM with PID 9152 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:31:43.754  INFO 9152 --- [main] web.game.avalon.CharacterFactoryTest     : No active profile set, falling back to default profiles: default
+2021-01-18 01:31:44.805  INFO 9152 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:31:44.891  INFO 9152 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 76 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:31:45.281  INFO 9152 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:31:45.495  INFO 9152 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:31:45.693  INFO 9152 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:31:45.752  INFO 9152 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:31:45.898  INFO 9152 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:31:46.994  INFO 9152 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:31:47.604  INFO 9152 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:31:47.614  INFO 9152 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:31:48.125  INFO 9152 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:31:48.138  INFO 9152 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:31:48.140  INFO 9152 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:31:48.186  INFO 9152 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:31:48.311  WARN 9152 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:31:49.046  INFO 9152 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:31:49.046  INFO 9152 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:31:49.047  INFO 9152 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:31:49.055  INFO 9152 --- [main] web.game.avalon.CharacterFactoryTest     : Started CharacterFactoryTest in 5.653 seconds (JVM running for 6.778)
+2021-01-18 01:31:49.267  INFO 9152 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:31:49.268  INFO 9152 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:31:49.268  INFO 9152 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:31:49.270  INFO 9152 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:31:49.271  INFO 9152 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:31:49.271  INFO 9152 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:31:49.271  INFO 9152 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:31:49.272  INFO 9152 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:31:49.274  INFO 9152 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:31:49.282  INFO 9152 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:34:03.595  INFO 32628 --- [main] web.game.avalon.CharacterFactoryTest     : Starting CharacterFactoryTest using Java 11.0.2 on DESKTOP-K79NAJM with PID 32628 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:34:03.598  INFO 32628 --- [main] web.game.avalon.CharacterFactoryTest     : No active profile set, falling back to default profiles: default
+2021-01-18 01:34:04.700  INFO 32628 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:34:04.810  INFO 32628 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 92 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:34:05.269  INFO 32628 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:34:05.505  INFO 32628 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:34:05.727  INFO 32628 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:34:05.787  INFO 32628 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:34:05.952  INFO 32628 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:34:07.091  INFO 32628 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:34:07.681  INFO 32628 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:34:07.691  INFO 32628 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:34:08.262  INFO 32628 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:34:08.276  INFO 32628 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:34:08.278  INFO 32628 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:34:08.328  INFO 32628 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:34:08.464  WARN 32628 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:34:09.332  INFO 32628 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:34:09.333  INFO 32628 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@66779435]]
+2021-01-18 01:34:09.334  INFO 32628 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:34:09.341  INFO 32628 --- [main] web.game.avalon.CharacterFactoryTest     : Started CharacterFactoryTest in 6.144 seconds (JVM running for 7.281)
+2021-01-18 01:34:09.592  INFO 32628 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:34:09.593  INFO 32628 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@66779435]]
+2021-01-18 01:34:09.593  INFO 32628 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:34:09.597  INFO 32628 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:34:09.598  INFO 32628 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:34:09.598  INFO 32628 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:34:09.599  INFO 32628 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:34:09.600  INFO 32628 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:34:09.603  INFO 32628 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:34:09.614  INFO 32628 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:42:01.625  INFO 11984 --- [main] web.game.avalon.CharacterFactoryTest     : Starting CharacterFactoryTest using Java 11.0.2 on DESKTOP-K79NAJM with PID 11984 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:42:01.628  INFO 11984 --- [main] web.game.avalon.CharacterFactoryTest     : No active profile set, falling back to default profiles: default
+2021-01-18 01:42:02.705  INFO 11984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:42:02.785  INFO 11984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:42:03.212  INFO 11984 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:42:03.418  INFO 11984 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:42:03.622  INFO 11984 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:42:03.679  INFO 11984 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:42:03.828  INFO 11984 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:42:04.928  INFO 11984 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:42:05.487  INFO 11984 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:42:05.497  INFO 11984 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:42:05.988  INFO 11984 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:42:06.000  INFO 11984 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:42:06.003  INFO 11984 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:42:06.045  INFO 11984 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:42:06.161  WARN 11984 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:42:06.918  INFO 11984 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:42:06.918  INFO 11984 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:42:06.919  INFO 11984 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:42:06.926  INFO 11984 --- [main] web.game.avalon.CharacterFactoryTest     : Started CharacterFactoryTest in 5.677 seconds (JVM running for 6.999)
+2021-01-18 01:42:07.141  INFO 11984 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:42:07.142  INFO 11984 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@17e8caf2]]
+2021-01-18 01:42:07.143  INFO 11984 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:42:07.144  INFO 11984 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:42:07.145  INFO 11984 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:42:07.145  INFO 11984 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:42:07.145  INFO 11984 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:42:07.146  INFO 11984 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:42:07.149  INFO 11984 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:42:07.157  INFO 11984 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-18 01:48:36.366  INFO 10076 --- [main] web.game.avalon.CharacterFactoryTest     : Starting CharacterFactoryTest using Java 11.0.2 on DESKTOP-K79NAJM with PID 10076 (started by msi in C:\Users\msi\Desktop\avalon\avalon_back\back)
+2021-01-18 01:48:36.373  INFO 10076 --- [main] web.game.avalon.CharacterFactoryTest     : No active profile set, falling back to default profiles: default
+2021-01-18 01:48:37.796  INFO 10076 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-01-18 01:48:37.868  INFO 10076 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 1 JPA repository interfaces.
+2021-01-18 01:48:38.299  INFO 10076 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-18 01:48:38.536  INFO 10076 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-18 01:48:38.771  INFO 10076 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-18 01:48:38.844  INFO 10076 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-01-18 01:48:38.991  INFO 10076 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-01-18 01:48:40.096  INFO 10076 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-01-18 01:48:40.684  INFO 10076 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-18 01:48:40.694  INFO 10076 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:48:41.223  INFO 10076 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:48:41.235  INFO 10076 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:48:41.238  INFO 10076 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:48:41.278  INFO 10076 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:48:41.404  WARN 10076 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-18 01:48:42.210  INFO 10076 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2021-01-18 01:48:42.210  INFO 10076 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@71098fb3]]
+2021-01-18 01:48:42.211  INFO 10076 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2021-01-18 01:48:42.218  INFO 10076 --- [main] web.game.avalon.CharacterFactoryTest     : Started CharacterFactoryTest in 6.321 seconds (JVM running for 7.612)
+2021-01-18 01:48:42.516  INFO 10076 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2021-01-18 01:48:42.517  INFO 10076 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@71098fb3]]
+2021-01-18 01:48:42.517  INFO 10076 --- [SpringContextShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2021-01-18 01:48:42.519  INFO 10076 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'messageBrokerTaskScheduler'
+2021-01-18 01:48:42.520  INFO 10076 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'brokerChannelExecutor'
+2021-01-18 01:48:42.520  INFO 10076 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientOutboundChannelExecutor'
+2021-01-18 01:48:42.520  INFO 10076 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'clientInboundChannelExecutor'
+2021-01-18 01:48:42.521  INFO 10076 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-18 01:48:42.524  INFO 10076 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-18 01:48:42.531  INFO 10076 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
