@@ -20,8 +20,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+
+        //registry.addEndpoint("/websocket").setAllowedOrigins("*").withSockJS(); //여기서 end point 등록
         registry.addEndpoint("/websocket").setAllowedOrigins("http://localhost:3000").withSockJS(); //여기서 end point 등록
-        System.out.println("호출!");
+        System.out.println("call stomp!");
         //.setAllowedOrigins("http://localhost:3000")
         //registry.addEndpoint("/gameSocket").withSockJS();
     }
