@@ -88,32 +88,8 @@ public class SocketController {
         Game game = room.getGame();
         ArrayList<String> users = game.getUserListString();
         ArrayList<Player> players = game.getPlayerList();
-        String msg = String.format("%s가 선택되었습니다", messageDto.getChoiceId());
-        for (int i = 0; i < users.size(); i++) {
-            if (messageDto.getChoiceId().equals(users.get(i))) {
-                //중복 X
-                if (!game.isDuplicationMember(players.get(i))) { //Round 를 통해 확인
-                    //Full
-                    if (game.isExpeditionMax()) {
-                        msg = "원정대가 인원수를 초과 하였습니다";
-                    } else { //추가
-                        game.changeCheck(i);
-
-                        game.addRoundUser(players.get(i));
-                        if (game.isExpeditionMax()) {
-                            msg += "\n원정대를 모두 선정하였습니다";
-                        }
-                    }
-                }//중복 O
-                else {
-                    game.changeCheck(i);
-                    game.deleteRoundUser(players.get(i));
-
-                    msg = String.format("%s가 제외되었습니다", messageDto.getChoiceId());
-                }
-                break;
-            }
-        }
+//
+        String msg=game.choice(messageDto);
 
         for (Player player : players) {
             CharacterDto characterDto = new CharacterDto();
@@ -290,7 +266,7 @@ public class SocketController {
         template.convertAndSend("/topic/roundInfo/" + roomId, roundDto);
     }
 
-    public void sendInitImage(MessageDto messageDto) {
+    private void sendInitImage(MessageDto messageDto) {
         Room room = manager.getRoomById(messageDto.getRoomId());
         Game game = room.getGame();
         //ArrayList<Player> players=game.getPlayerList();

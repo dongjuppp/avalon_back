@@ -46,6 +46,33 @@ public class Game {
         return killDto;
     }
 
+    public String choice(MessageDto messageDto){
+        String msg = String.format("%s가 선택되었습니다", messageDto.getChoiceId());
+        for(Player player:playerList){
+            if(messageDto.getChoiceId().equals(player.getUserId())){
+                if(!isDuplicationMember(player)){
+                    if(isExpeditionMax()){
+                        msg = "원정대가 인원수를 초과 하였습니다";
+                    }
+                    else{
+                        changeCheck(playerList.indexOf(player));
+                        addRoundUser(player);
+                        if (isExpeditionMax()) {
+                            msg += "\n원정대를 모두 선정하였습니다";
+                        }
+                    }
+                }
+                else{
+                    changeCheck(playerList.indexOf(player));
+                    deleteRoundUser(player);
+                    msg = String.format("%s가 제외되었습니다", messageDto.getChoiceId());
+                }
+                break;
+            }
+        }
+        return msg;
+    }
+
     public MessageDto checkEndGame(StateEnum stateEnum, MessageDto messageDto){
         if(stateEnum!=null){
             MessageDto message=new MessageDto();
