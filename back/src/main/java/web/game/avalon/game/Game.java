@@ -1,5 +1,7 @@
 package web.game.avalon.game;
 
+import web.game.avalon.dto.KillDto;
+import web.game.avalon.dto.MessageDto;
 import web.game.avalon.dto.UserDto;
 import web.game.avalon.game.character.CharacterFactory;
 import web.game.avalon.game.character.GameCharacter;
@@ -23,7 +25,41 @@ public class Game {
         playerList = new ArrayList<>();
         round = new Round();
         playerTable = new Hashtable<>();
+    }
 
+    public KillDto killMerlin(MessageDto messageDto){
+        KillDto killDto=new KillDto();
+        boolean result=false;
+        String name = "";
+        String job = "";
+        for (Player player : getPlayerList()) {
+            if (player.getUserId().equals(messageDto.getChoiceId())) {
+                if (player.getGameCharacter().getName().equals("멀린")) {
+                    result = true;
+                }
+                killDto.setName(player.getUserId());
+                killDto.setJob(player.getGameCharacter().getName());
+            }
+        }
+
+
+        return killDto;
+    }
+
+    public MessageDto checkEndGame(StateEnum stateEnum, MessageDto messageDto){
+        if(stateEnum!=null){
+            MessageDto message=new MessageDto();
+            if(stateEnum==StateEnum.GoodWin){
+                message.setMsg("선의 승리입니다.<br/> 암살자는 멀린을 찾으세요!<br/>");
+                message.setUserId(getAssassinId());
+            }
+            else if(stateEnum==StateEnum.EvilWin){
+                message.setMsg("악의 승리입니다<br/>게임이 종료되었습니다<br/>");
+            }
+            else return null;
+            return message;
+        }
+        return null;
     }
 
     public String getAssassinId() {

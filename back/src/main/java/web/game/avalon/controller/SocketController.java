@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import web.game.avalon.dto.CharacterDto;
-import web.game.avalon.dto.MessageDto;
-import web.game.avalon.dto.RoundDto;
-import web.game.avalon.dto.UserDto;
+import web.game.avalon.dto.*;
 import web.game.avalon.game.Game;
 import web.game.avalon.game.Player;
 import web.game.avalon.game.Room;
@@ -32,9 +29,9 @@ public class SocketController {
 
     @MessageMapping("/chatting")
     public void test(MessageDto messageDto) {
-        //Room room=manager.getRoomById(messageDto.getRoomId());
+
         String msg = String.format("%s:%s", messageDto.getUserId(), messageDto.getMsg());
-        //System.out.println(messageDto.getRoomId());
+
         template.convertAndSend("/topic/chatting/" + messageDto.getRoomId(), msg);
     }
 
@@ -70,27 +67,17 @@ public class SocketController {
     public void kill(MessageDto messageDto) {
         Room room = manager.getRoomById(messageDto.getRoomId());
         Game game = room.getGame();
+        KillDto killDto=game.killMerlin(messageDto);
 
-        boolean result = false;
-        String name = "";
-        String job = "";
-        for (Player player : game.getPlayerList()) {
-            if (player.getUserId().equals(messageDto.getChoiceId())) {
-                if (player.getGameCharacter().getName().equals("멀린")) {
-                    result = true;
-                }
-                name = player.getUserId();
-                job = player.getGameCharacter().getName();
-            }
-
-        }
-        if (result) {//암살 성공
+        if (killDto.isResult()) {//암살 성공
             template.convertAndSend("/topic/expeditionMsg/" + messageDto.getRoomId(),
-                    String.format("암살자(%s)가 멀린(%s)를 암살하였습니다<br/>게임이 종료 되었습니다", messageDto.getUserId(), name));
+                    String.format("암살자(%s)가 멀린(%s)를 암살하였습니다<br/>게임이 종료 되었습니다"
+                            , messageDto.getUserId(),killDto.getName()));
             sendEndImage(messageDto);
         } else {
             template.convertAndSend("/topic/expeditionMsg/" + messageDto.getRoomId(),
-                    String.format("암살자(%s)가 %s(%s)를 암살하였습니다<br/>게임이 종료 되었습니다", messageDto.getUserId(), job, name));
+                    String.format("암살자(%s)가 %s(%s)를 암살하였습니다<br/>게임이 종료 되었습니다"
+                            , messageDto.getUserId(), killDto.getJob(), killDto.getName()));
             sendEndImage(messageDto);
         }
     }
@@ -99,7 +86,6 @@ public class SocketController {
     public void choice(MessageDto messageDto) {
         Room room = manager.getRoomById(messageDto.getRoomId());
         Game game = room.getGame();
-        logger.info(String.format("%s가 유저를 선택 하였습니다", messageDto.getUserId()));
         ArrayList<String> users = game.getUserListString();
         ArrayList<Player> players = game.getPlayerList();
         String msg = String.format("%s가 선택되었습니다", messageDto.getChoiceId());
