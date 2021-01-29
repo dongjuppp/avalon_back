@@ -11,9 +11,6 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        //registry.enableSimpleBroker("/topic"); //전달
-        //registry.setApplicationDestinationPrefixes("/app"); //받는 부분
-
         registry.enableSimpleBroker("/topic");
         registry.setApplicationDestinationPrefixes("/app");
     }
