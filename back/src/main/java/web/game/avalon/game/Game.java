@@ -161,6 +161,31 @@ public class Game {
         return round.isDuplicationMember(player);
     }
 
+    public boolean isAllVoteExpeditionMember(){
+        for(Player player:playerList){
+            if(round.isMember(player)){
+                if(!player.isVote()) return false;
+            }
+        }
+        return true;
+    }
+
+    //찬성 반대 투표를 모두 했는지 체크
+    public boolean checkAllVote(){
+        for(Player player:playerList){
+            if(!player.isVote()) return false;
+        }
+        return true;
+    }
+
+    public void votePlayer(String userId){
+        playerTable.get(userId).setVote(true);
+    }
+
+    public void initPlayerIsVote(){
+        playerList.forEach(player -> player.setVote(false));
+    }
+
     public boolean isExpeditionMember(String userId) {
         return round.isMember(playerTable.get(userId));
     }

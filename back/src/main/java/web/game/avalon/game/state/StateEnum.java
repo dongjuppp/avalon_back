@@ -10,10 +10,11 @@ public enum StateEnum {
     ChoiceComplete(3,"원정대선택완료"),
     VoteOne(4,"원정대 보내기 찬성반대 투표"),
     Expedition(5,"원정대 출발"),
-    GoodWin(6,"선 승리"),
-    EvilWin(7,"악승리"),
-    AssassinChoice(8,"암살자 선택중"),
-    GameEnd(9,"게임 종료");
+    ExpeditionVoteAll(6,"원정대 투표 완료"),
+    GoodWin(7,"선 승리"),
+    EvilWin(8,"악승리"),
+    AssassinChoice(9,"암살자 선택중"),
+    GameEnd(10,"게임 종료");
 
     private int stateNum;
     private String stateStr;

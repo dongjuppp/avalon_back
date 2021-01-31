@@ -17,6 +17,7 @@ public class Player {
     private ArrayList<String> images;
     private Boolean checked; //게임에서 선택되었는지 화면에 표시하기 위함
     private Boolean proAndCons; //찬성 반대, 성공 실패를 위함
+    private boolean isVote;
 
 
     public Player(){}
@@ -25,5 +26,6 @@ public class Player {
         this.turnNumber=turnNumber;
         this.userId=userId;
         this.checked=false;
+        this.isVote=false;
     }
 }

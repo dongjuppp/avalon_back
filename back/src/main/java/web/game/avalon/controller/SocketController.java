@@ -103,19 +103,20 @@ public class SocketController {
         }
     }
 
+
+    //@Todo 게임종료를 천천히 보여줄것
     @MessageMapping("/expeditionEnd")
     public void expeditionEnd(MessageDto messageDto) {
         Game game = manager.getRoomById(messageDto.getRoomId()).getGame();
-        if (game.getStateEnum() != StateEnum.Expedition) return;
+        if (game.getStateEnum() != StateEnum.ExpeditionVoteAll) return;
         if (!game.getPlayerList().get(game.getNowTurn()).getUserId().equals(messageDto.getUserId())) return;
         String msg = "";
+        game.initPlayerIsVote();
         if (game.isWinRound()) {
             msg = String.format("%d 라운드는 선의 승리입니다<br/>", game.getNowRound() + 1);
-            msg += game.getExpeditionVote();
             game.changeMainRound(true);
         } else {
             msg = String.format("%d 라운드는 선의 패배입니다<br/>", game.getNowRound() + 1);
-            msg += game.getExpeditionVote();
             game.changeMainRound(false);
         }
         StateEnum check = game.checkEndGame();
@@ -138,6 +139,11 @@ public class SocketController {
         if (game.getStateEnum() != StateEnum.Expedition) return;
         if (!game.isExpeditionMember(messageDto.getUserId())) return;
         game.voteExpedition(messageDto.getUserId(), true);
+
+        game.votePlayer(messageDto.getUserId());
+        if(game.isAllVoteExpeditionMember()){
+            game.setStateEnum(StateEnum.ExpeditionVoteAll);
+        }
         template.convertAndSend("/topic/voteWinLose/" + messageDto.getRoomId(),
                 String.format("%s가 성공/실패 투표를 하였습니다", messageDto.getUserId()));
     }
@@ -148,6 +154,10 @@ public class SocketController {
         if (!game.isExpeditionMember(messageDto.getUserId())) return;
         if (game.getStateEnum() != StateEnum.Expedition) return;
         game.voteExpedition(messageDto.getUserId(), false);
+        game.votePlayer(messageDto.getUserId());
+        if(game.isAllVoteExpeditionMember()){
+            game.setStateEnum(StateEnum.ExpeditionVoteAll);
+        }
         template.convertAndSend("/topic/voteWinLose/" + messageDto.getRoomId(),
                 String.format("%s가 성공/실패 투표를 하였습니다", messageDto.getUserId()));
     }
@@ -169,18 +179,18 @@ public class SocketController {
     public void prosAndConsEnd(MessageDto messageDto) {
         Game game = getGame(messageDto);
         if (game == null) return;
-        if (game.getStateEnum() != StateEnum.ChoiceComplete) return;
+        if (game.getStateEnum() != StateEnum.VoteOne) return;
         String msg = "";
         int count = 0;
         for (Player player : game.getPlayerList()) {
-            if (player.getProAndCons()) {
+            if (player.getProAndCons()) { //@Todo nullPointerException
                 msg += String.format("%s: 찬성<br/>", player.getUserId());
                 count++;
             } else msg += String.format("%s: 반대<br/>", player.getUserId());
         }
 
-        game.initCheck(); //원정대 선택되었음을 초기화?
-
+        game.initCheck(); //원정대로 선택된 사람들을 초기화
+        game.initPlayerIsVote(); //찬성 반대 투표여부 초기화
         if (count > game.getPlayerList().size() / 2) {
             msg += "<br/>결과: 원정대 출발<br/>원정대는 성공/실패 투표를하세요<br/>";
             game.setStateEnum(StateEnum.Expedition);
@@ -214,6 +224,10 @@ public class SocketController {
         String msg = String.format("%s가 찬성/반대 투표를 하였습니다", messageDto.getUserId());
         logger.info(msg);
         game.setPlayerProsAndCons(messageDto.getUserId(), true);
+        game.votePlayer(messageDto.getUserId());
+        if(game.checkAllVote()){
+            game.setStateEnum(StateEnum.VoteOne);
+        }
         template.convertAndSend("/topic/expeditionMsg/" + messageDto.getRoomId(),
                 msg);
     }
@@ -223,8 +237,13 @@ public class SocketController {
         Room room = manager.getRoomById(messageDto.getRoomId());
         Game game = room.getGame();
         String msg = String.format("%s가 찬성/반대 투표를 하였습니다", messageDto.getUserId());
+
         game.setPlayerProsAndCons(messageDto.getUserId(), false);
-        logger.info(msg);
+        //game.setPlayerProsAndCons(messageDto.getUserId(), true);
+        game.votePlayer(messageDto.getUserId());
+        if(game.checkAllVote()){
+            game.setStateEnum(StateEnum.VoteOne);
+        }
         template.convertAndSend("/topic/expeditionMsg/" + messageDto.getRoomId(),
                 msg);
     }

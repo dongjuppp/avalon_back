@@ -29,7 +29,7 @@ public class LoginController {
         if(tmp==null) return "fail";
 
         if(tmp.getPwd().equals(hash)){
-            return "success";
+            return tmp.getName();
         }
 
         return "fail";
