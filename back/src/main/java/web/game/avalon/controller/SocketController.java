@@ -110,6 +110,7 @@ public class SocketController {
         Game game = manager.getRoomById(messageDto.getRoomId()).getGame();
         if (game.getStateEnum() != StateEnum.ExpeditionVoteAll) return;
         if (!game.getPlayerList().get(game.getNowTurn()).getUserId().equals(messageDto.getUserId())) return;
+
         String msg = "";
         game.initPlayerIsVote();
         if (game.isWinRound()) {
@@ -119,18 +120,20 @@ public class SocketController {
             msg = String.format("%d 라운드는 선의 패배입니다<br/>", game.getNowRound() + 1);
             game.changeMainRound(false);
         }
-        StateEnum check = game.checkEndGame();
-        if (checkEndGame(check, messageDto, game.getAssassinId())) return;
-        game.setNextTurn();
-        game.initCheck();
-        game.initRoundUser();
-        game.setStateEnum(StateEnum.Choice);
-        msg += String.format("<br/>다음 왕관은 %s 입니다<br/>", game.getPlayerList().get(game.getNowTurn()).getUserId());
-        template.convertAndSend("/topic/expeditionEnd/" + messageDto.getRoomId(), msg);
-        sendInitImage(messageDto);
 
-        game.initSubRound();
-        sendRoundImage(game.getMainRound(), game.getSubRound(), messageDto.getRoomId());
+        StateEnum check = game.checkEndGame();
+        if (!checkEndGame(check, messageDto, game.getAssassinId())) {
+            game.setNextTurn();
+            game.initCheck();
+            game.initRoundUser();
+            game.setStateEnum(StateEnum.Choice);
+            msg += String.format("<br/>다음 왕관은 %s 입니다<br/>", game.getPlayerList().get(game.getNowTurn()).getUserId());
+            template.convertAndSend("/topic/expeditionEnd/" + messageDto.getRoomId(), msg);
+            sendInitImage(messageDto);
+
+            game.initSubRound();
+            sendRoundImage(game.getMainRound(), game.getSubRound(), messageDto.getRoomId());
+        }
     }
 
     @MessageMapping("/expeditionWin")
