@@ -29,13 +29,11 @@ public class Game {
 
     public KillDto killMerlin(MessageDto messageDto){
         KillDto killDto=new KillDto();
-        boolean result=false;
-        String name = "";
-        String job = "";
+        killDto.setResult(false);
         for (Player player : getPlayerList()) {
             if (player.getUserId().equals(messageDto.getChoiceId())) {
                 if (player.getGameCharacter().getName().equals("멀린")) {
-                    result = true;
+                    killDto.setResult(true);
                 }
                 killDto.setName(player.getUserId());
                 killDto.setJob(player.getGameCharacter().getName());
@@ -259,13 +257,18 @@ public class Game {
         for (int i = 0; i < users.size(); i++) {
             Player player = new Player(i + 1, users.get(i).getUserId());
             player.setGameCharacter(characters.get(i));
-            playerList.add(player);
+            //playerList.add(player);
+            addUser(player);
             playerTable.put(player.getUserId(), player);
         }
 
         //역할에 따른 이미지 부여
         CharacterFactory.setPersonalImages(users, playerList);
         return playerList;
+    }
+
+    public void addUser(Player player){
+        playerList.add(player);
     }
 
     public ArrayList<Player> getExpeditionMember() {

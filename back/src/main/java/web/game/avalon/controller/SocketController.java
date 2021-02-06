@@ -2,6 +2,7 @@ package web.game.avalon.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -22,6 +23,7 @@ public class SocketController {
     private SimpMessagingTemplate template;
     private RoomManager manager;
 
+    @Autowired
     public SocketController(SimpMessagingTemplate template, RoomManager manager) {
         this.template = template;
         this.manager = manager;
