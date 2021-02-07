@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import web.game.avalon.service.EmailService;
 import web.game.avalon.table.User;
 import web.game.avalon.service.UserService;
 import web.game.avalon.utils.Encryption;
+import web.game.avalon.utils.ValidationCode;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -14,10 +16,12 @@ import java.security.NoSuchAlgorithmException;
 public class LoginController {
 
     private UserService userService;
+    private EmailService emailService;
 
     @Autowired
-    public LoginController(UserService userService){
+    public LoginController(UserService userService,EmailService emailService){
         this.userService=userService;
+        this.emailService=emailService;
     }
 
     @PostMapping("/login")
@@ -36,7 +40,7 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public String signUp(@RequestBody User user) throws NoSuchAlgorithmException {
+    public String signUp(@RequestBody User user){
         User name = userService.findUserByName(user.getName());
         User id=userService.findUserById(user.getId());
 
@@ -47,9 +51,19 @@ public class LoginController {
         if(id!=null){
             return "id_duplication";
         }
-        String hash= Encryption.getSha256(user.getId(), user.getPwd());
+        String validationCode = ValidationCode.excuteGenerate();
+        emailService.sendMail(validationCode,user.getId());
+        //System.out.println(user.getId());
+        return "success/"+validationCode;
+    }
+
+    @PostMapping("/validation")
+    public String validation(@RequestBody User user) throws NoSuchAlgorithmException{
+        //System.out.println(user);
+        String hash=Encryption.getSha256(user.getId(),user.getPwd());
         user.setPwd(hash);
         User saveUser=userService.saveUser(user);
+        //System.out.println(saveUser);
         if(saveUser!=null) return "success";
         return "fail";
     }
