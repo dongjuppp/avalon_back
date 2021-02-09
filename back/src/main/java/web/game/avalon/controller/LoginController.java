@@ -52,9 +52,18 @@ public class LoginController {
             return "id_duplication";
         }
         String validationCode = ValidationCode.excuteGenerate();
-        emailService.sendMail(validationCode,user.getId());
+
+        try{
+            new Thread(()->{
+                emailService.sendMail(validationCode,user.getId());
+            }).start();
+            return "success/"+validationCode;
+        }catch(Exception e){
+            e.printStackTrace();
+            return "emailFail";
+        }
         //System.out.println(user.getId());
-        return "success/"+validationCode;
+
     }
 
     @PostMapping("/validation")
