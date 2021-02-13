@@ -1,6 +1,7 @@
 package web.game.avalon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import web.game.avalon.service.UserService;
 import web.game.avalon.utils.Encryption;
 import web.game.avalon.utils.ValidationCode;
 
+import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
@@ -40,7 +42,10 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public String signUp(@RequestBody User user){
+    public String signUp(@RequestBody @Valid User user, BindingResult error){
+        if(error.hasErrors()){
+            return "inputError";
+        }
         User name = userService.findUserByName(user.getName());
         User id=userService.findUserById(user.getId());
 
