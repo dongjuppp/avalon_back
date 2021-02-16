@@ -58,16 +58,11 @@ public class LoginController {
         }
         String validationCode = ValidationCode.excuteGenerate();
 
-        try{
-            new Thread(()->{
-                emailService.sendMail(validationCode,user.getId());
-            }).start();
+        if(emailService.sendMail(validationCode,user.getId())){
             return "success/"+validationCode;
-        }catch(Exception e){
-            e.printStackTrace();
-            return "emailFail";
         }
-        //System.out.println(user.getId());
+        return "emailFail";
+
 
     }
 
